@@ -1,11 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {  NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, NgxSpinnerModule],
+  imports: [CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -20,15 +19,11 @@ export class ProfileComponent {
     location: 'New York, NY'
   });
 
-  isSidebarOpen = signal(false);
-
-  toggleSidebar() {
-    this.isSidebarOpen.update(v => !v);
-  }
-
-  closeSidebar() {
-    this.isSidebarOpen.set(false);
-  }
+  stats = {
+    totalOrders: 24,
+    reviewsGiven: 18,
+    wishlistItems: 12
+  };
 
   recentOrders = [
     { id: '#12345', status: 'Delivered', name: 'Premium Brake Disc Set', date: 'Dec 5, 2024', price: '$149.99', statusClass: 'status-delivered' },

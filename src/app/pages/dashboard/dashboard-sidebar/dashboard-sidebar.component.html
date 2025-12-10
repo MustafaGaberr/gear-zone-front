@@ -1,0 +1,35 @@
+<!-- Sidebar Overlay -->
+@if (isOpen()) {
+<div
+  class="sidebar-backdrop position-fixed top-0 start-0 w-100 h-100 bg-dark opacity-50 z-2"
+  (click)="onClose()"
+></div>
+}
+
+<!-- Sidebar -->
+<div class="sidebar-container" [class.show]="isOpen()">
+  <div class="card border-0 shadow-sm sidebar-card rounded-5">
+    <div class="card-body p-0">
+      <div class="d-flex justify-content-between align-items-center p-4">
+        <h5 class="mb-0 fw-bold">Dashboard</h5>
+        <button class="btn btn-sm btn-close d-md-none" (click)="onClose()"></button>
+      </div>
+      <div class="list-group list-group-flush p-3 pt-0">
+        @for (link of links; track link.path) {
+          <a
+            class="list-group-item list-group-item-action border-0 rounded-5 my-1"
+            [routerLink]="link.path"
+            routerLinkActive="active"
+            (click)="onLinkClick()"
+          >
+            <i class="bi {{ link.icon }} fs-5 me-2"></i> {{ link.label }}
+          </a>
+        }
+        <a class="list-group-item list-group-item-action text-danger border-0 rounded-5 my-1 mt-2 logout-link">
+          <i class="bi bi-box-arrow-right fs-5 me-2"></i> Logout
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,105 @@
+<div class="card border-0 shadow-sm rounded-5 messages-container">
+  <div class="row g-0 h-100">
+    <!-- Conversations List -->
+    <div class="col-md-4 border-end conversations-list">
+      <div class="p-4 border-bottom">
+        <h5 class="fw-bold mb-0">Messages</h5>
+        @if (unreadCount > 0) {
+          <small class="text-muted">{{ unreadCount }} unread</small>
+        }
+      </div>
+      <div class="conversations-scroll">
+        @for (conversation of conversations; track conversation.id) {
+          <div
+            class="conversation-item p-3 d-flex gap-3 align-items-center"
+            [class.active]="selectedConversation()?.id === conversation.id"
+            [class.unread]="conversation.unread"
+            (click)="selectConversation(conversation)"
+          >
+            <div class="position-relative">
+              <div class="avatar-sm d-flex align-items-center justify-content-center text-white rounded-circle">
+                {{ conversation.avatar }}
+              </div>
+              @if (conversation.online) {
+                <span class="online-indicator position-absolute"></span>
+              }
+            </div>
+            <div class="flex-grow-1 overflow-hidden">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6 class="fw-semibold mb-0 text-truncate">{{ conversation.name }}</h6>
+                <small class="text-muted flex-shrink-0">{{ conversation.time }}</small>
+              </div>
+              <p class="text-muted small mb-0 text-truncate">{{ conversation.lastMessage }}</p>
+            </div>
+            @if (conversation.unread) {
+              <div class="unread-badge"></div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="col-md-8 d-flex flex-column chat-area">
+      @if (selectedConversation()) {
+        <!-- Chat Header -->
+        <div class="p-3 border-bottom d-flex align-items-center gap-3">
+          <div class="position-relative">
+            <div class="avatar-sm d-flex align-items-center justify-content-center text-white rounded-circle">
+              {{ selectedConversation().avatar }}
+            </div>
+            @if (selectedConversation().online) {
+              <span class="online-indicator position-absolute"></span>
+            }
+          </div>
+          <div>
+            <h6 class="fw-semibold mb-0">{{ selectedConversation().name }}</h6>
+            <small class="text-muted">
+              @if (selectedConversation().online) {
+                <span class="text-success">● Online</span>
+              } @else {
+                Offline
+              }
+            </small>
+          </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="messages-scroll flex-grow-1 p-4">
+          @for (message of messages; track message.id) {
+            <div class="message-wrapper mb-3" [class.sent]="message.sender === 'user'">
+              <div class="message-bubble p-3 rounded-4">
+                <p class="mb-0">{{ message.text }}</p>
+              </div>
+              <small class="text-muted d-block mt-1">{{ message.time }}</small>
+            </div>
+          }
+        </div>
+
+        <!-- Message Input -->
+        <div class="p-3 border-top">
+          <form (ngSubmit)="sendMessage()" class="d-flex gap-2">
+            <input
+              type="text"
+              class="form-control rounded-pill"
+              placeholder="Type a message..."
+              [(ngModel)]="newMessage"
+              name="newMessage"
+            >
+            <button type="submit" class="btn btn-primary rounded-circle send-btn">
+              <i class="bi bi-send"></i>
+            </button>
+          </form>
+        </div>
+      } @else {
+        <!-- Empty State -->
+        <div class="d-flex flex-column align-items-center justify-content-center h-100 text-muted">
+          <i class="bi bi-chat-dots fs-1 mb-3"></i>
+          <h5>Select a conversation</h5>
+          <p class="small">Choose a conversation from the list to start messaging</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
