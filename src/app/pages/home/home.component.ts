@@ -5,7 +5,6 @@ import { CategoriesSectionComponent } from './components/categories-section/cate
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
 import { WhyChooseComponent } from './components/why-choose/why-choose.component';
 import { CtaSectionComponent } from './components/cta-section/cta-section.component';
-import { FooterComponent } from '../../layout/footer/footer.component';
 
 @Component({
   selector: 'app-home',
@@ -16,8 +15,7 @@ import { FooterComponent } from '../../layout/footer/footer.component';
     CategoriesSectionComponent,
     FeaturedProductsComponent,
     WhyChooseComponent,
-    CtaSectionComponent,
-    FooterComponent
+    CtaSectionComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
