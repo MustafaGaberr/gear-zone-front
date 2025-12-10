@@ -1,0 +1,35 @@
+<section class="why-choose py-5 bg-light">
+  <div class="container py-4">
+    <!-- Header -->
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold text-dark mb-3">
+        Why Choose GearZone
+      </h2>
+      <p class="text-secondary fs-6">
+        We provide the best experience for buying and selling car parts
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="row g-4 g-lg-5">
+      <div class="col-12 col-md-4" *ngFor="let feature of features">
+        <div class="text-center">
+          <!-- Icon -->
+          <div class="d-flex justify-content-center mb-4">
+            <div class="feature-icon rounded-4 d-flex align-items-center justify-content-center" [ngClass]="feature.gradientClass">
+              <i [class]="'bi ' + feature.icon + ' text-white fs-2'"></i>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <h3 class="fs-5 fw-semibold text-dark mb-3">
+            {{ feature.title }}
+          </h3>
+          <p class="text-secondary">
+            {{ feature.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

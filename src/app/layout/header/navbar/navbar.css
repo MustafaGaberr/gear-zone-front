@@ -1,0 +1,41 @@
+.navbar-bg {
+  background-color: #111827 !important;
+}
+
+.navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.nav-link-custom {
+  color: rgba(255, 255, 255, 0.9) !important;
+  transition: color 0.2s ease;
+  padding: 0.5rem 1rem !important;
+}
+
+.nav-link-custom:hover {
+  color: #1a73e8 !important;
+}
+
+.btn-primary {
+  background-color: #1a73e8;
+  border-color: #1a73e8;
+}
+
+.btn-primary:hover {
+  background-color: #1557b0;
+  border-color: #1557b0;
+}
+
+.bg-orange {
+  background-color: #f97316 !important;
+}
+
+.border-secondary {
+  border-color: #374151 !important;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+

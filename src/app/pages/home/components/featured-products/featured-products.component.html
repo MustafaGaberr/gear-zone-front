@@ -1,0 +1,71 @@
+<section class="featured-products py-5 bg-white">
+  <div class="container py-4">
+    <!-- Header -->
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-5 gap-3">
+      <div>
+        <h2 class="display-5 fw-bold text-dark mb-2">
+          Featured Products
+        </h2>
+        <p class="text-secondary mb-0">
+          Top-rated parts from verified sellers
+        </p>
+      </div>
+      <a routerLink="/products" class="btn btn-link text-decoration-none d-flex align-items-center gap-2 view-all-link">
+        View All
+        <i class="bi bi-arrow-right"></i>
+      </a>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="row g-4">
+      <div class="col-12 col-sm-6 col-lg-3" *ngFor="let product of products">
+        <a
+          [routerLink]="['/products', product.id]"
+          class="product-card card h-100 border rounded-4 overflow-hidden text-decoration-none"
+        >
+          <!-- Image -->
+          <div class="product-image position-relative">
+            <img
+              [src]="product.image"
+              [alt]="product.name"
+              class="card-img-top"
+            />
+            <span
+              *ngIf="product.badge"
+              class="badge bg-orange position-absolute top-0 start-0 m-3 rounded-3"
+            >
+              {{ product.badge }}
+            </span>
+          </div>
+
+          <!-- Content -->
+          <div class="card-body p-4">
+            <h3 class="fs-6 fw-semibold text-dark mb-2 product-title">
+              {{ product.name }}
+            </h3>
+
+            <!-- Rating -->
+            <div class="d-flex align-items-center gap-1 mb-3">
+              <i class="bi bi-star-fill text-warning small"></i>
+              <span class="text-dark small fw-medium">{{ product.rating }}</span>
+              <span class="text-secondary small">({{ product.reviewCount }})</span>
+            </div>
+
+            <!-- Price -->
+            <div class="d-flex align-items-center gap-2">
+              <span class="fs-5 fw-semibold text-primary">
+                ${{ product.price }}
+              </span>
+              <span
+                *ngIf="product.originalPrice"
+                class="text-secondary small text-decoration-line-through"
+              >
+                ${{ product.originalPrice }}
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

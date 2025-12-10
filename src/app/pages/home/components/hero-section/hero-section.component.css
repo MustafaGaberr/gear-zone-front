@@ -1,0 +1,61 @@
+.hero-section {
+  min-height: 600px;
+  background: linear-gradient(180deg, #111827 0%, #1e293b 50%, #0f172a 100%);
+}
+
+.hero-bg-decorations {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.decoration-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.decoration-blue {
+  top: 80px;
+  left: 80px;
+  width: 288px;
+  height: 288px;
+  background-color: #1a73e8;
+}
+
+.decoration-orange {
+  bottom: 80px;
+  right: 80px;
+  width: 384px;
+  height: 384px;
+  background-color: #f97316;
+}
+
+.search-container {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.search-container input:focus {
+  box-shadow: none !important;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-primary {
+  color: #1a73e8 !important;
+}
+
+.btn-primary {
+  background-color: #1a73e8;
+  border-color: #1a73e8;
+}
+
+.btn-primary:hover {
+  background-color: #1557b0;
+  border-color: #1557b0;
+}

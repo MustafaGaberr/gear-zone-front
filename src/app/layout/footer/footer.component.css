@@ -1,0 +1,15 @@
+.footer-section {
+  background-color: #111827;
+}
+
+.footer-link {
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #fff !important;
+}
+
+.border-secondary {
+  border-color: #374151 !important;
+}

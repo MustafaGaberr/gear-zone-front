@@ -1,0 +1,139 @@
+<nav class="navbar navbar-expand-md navbar-dark sticky-top" [ngClass]="transparent ? 'bg-transparent' : 'navbar-bg shadow'">
+  <div class="container">
+    <!-- Logo -->
+    <a routerLink="/" class="navbar-brand">
+      <img [src]="logoImage" alt="GearZone" height="40" />
+    </a>
+
+    <!-- Mobile Menu Toggle -->
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      (click)="toggleMobileMenu()"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Desktop Navigation -->
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': isMobileMenuOpen }">
+      <ul class="navbar-nav mx-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link nav-link-custom" (click)="closeMobileMenu()">Home</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/products" class="nav-link nav-link-custom" (click)="closeMobileMenu()">Products</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/contact" class="nav-link nav-link-custom" (click)="closeMobileMenu()">Contact</a>
+        </li>
+      </ul>
+
+      <!-- Actions -->
+      <div class="d-flex align-items-center gap-3">
+        <!-- Logged-in user -->
+        <ng-container *ngIf="user; else guestLinks">
+          <!-- Notifications -->
+          <button
+            (click)="toggleNotification()"
+            class="btn btn-link text-white p-0 position-relative"
+          >
+            <i class="bi bi-bell fs-5"></i>
+            <span
+              *ngIf="notifications > 0"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              {{ notifications }}
+            </span>
+          </button>
+
+          <!-- Messages -->
+          <a
+            [routerLink]="['/', user?.type + '-dashboard', 'messages']"
+            class="btn btn-link text-white p-0 position-relative"
+          >
+            <i class="bi bi-chat-dots fs-5"></i>
+            <span
+              *ngIf="messages > 0"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              {{ messages }}
+            </span>
+          </a>
+
+          <!-- Profile -->
+          <a
+            [routerLink]="['/', user?.type + '-dashboard', 'profile']"
+            class="d-flex align-items-center gap-2 text-white text-decoration-none"
+          >
+            <ng-container *ngIf="user?.avatar; else defaultAvatar">
+              <img
+                [src]="user?.avatar"
+                [alt]="user?.name"
+                class="rounded-circle"
+                width="32"
+                height="32"
+              />
+            </ng-container>
+            <ng-template #defaultAvatar>
+              <i class="bi bi-person-circle fs-5"></i>
+            </ng-template>
+            <span class="d-none d-lg-inline">{{ user?.name }}</span>
+          </a>
+        </ng-container>
+
+        <!-- Guest links -->
+        <ng-template #guestLinks>
+          <a
+            routerLink="/login"
+            class="nav-link nav-link-custom d-none d-md-block"
+            (click)="closeMobileMenu()"
+          >
+            Login
+          </a>
+          <a
+            routerLink="/register"
+            class="btn btn-primary rounded-3 px-4 d-none d-md-block"
+            (click)="closeMobileMenu()"
+          >
+            Register
+          </a>
+        </ng-template>
+
+        <!-- Cart -->
+        <button
+          (click)="toggleCart()"
+          class="btn btn-link text-white p-0 position-relative"
+        >
+          <i class="bi bi-cart3 fs-5"></i>
+          <span
+            *ngIf="cartItemCount > 0"
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange"
+          >
+            {{ cartItemCount }}
+          </span>
+        </button>
+      </div>
+
+      <!-- Mobile Auth Buttons -->
+      <div class="d-md-none border-top border-secondary mt-3 pt-3" *ngIf="!user">
+        <div class="d-grid gap-2">
+          <a
+            routerLink="/login"
+            class="btn btn-outline-light"
+            (click)="closeMobileMenu()"
+          >
+            Login
+          </a>
+          <a
+            routerLink="/register"
+            class="btn btn-primary"
+            (click)="closeMobileMenu()"
+          >
+            Register
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

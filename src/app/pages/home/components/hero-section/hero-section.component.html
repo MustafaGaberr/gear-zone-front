@@ -1,0 +1,61 @@
+<section class="hero-section position-relative overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="hero-bg-decorations">
+    <div class="decoration-circle decoration-blue"></div>
+    <div class="decoration-circle decoration-orange"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="container position-relative py-5">
+    <div class="row justify-content-center text-center pt-5">
+      <div class="col-lg-10 col-xl-8">
+        <!-- Heading -->
+        <h1 class="display-4 fw-bold text-white mb-2">
+          Find Quality Car Parts
+        </h1>
+        <p class="display-5 fw-bold text-primary mb-4">
+          At Unbeatable Prices
+        </p>
+        <p class="lead text-light opacity-75 mb-5">
+          Shop from thousands of verified sellers offering genuine automotive spare parts for all car models
+        </p>
+
+        <!-- Search Bar -->
+        <div class="search-container bg-white rounded-4 p-3 shadow-lg mb-5">
+          <div class="d-flex flex-column flex-sm-row gap-3">
+            <div class="flex-grow-1 d-flex align-items-center gap-3 px-3">
+              <i class="bi bi-search text-secondary fs-5"></i>
+              <input
+                type="text"
+                [(ngModel)]="searchQuery"
+                (keyup.enter)="onSearch()"
+                placeholder="Search by part name or car model..."
+                class="form-control border-0 shadow-none fs-6"
+              />
+            </div>
+            <button
+              (click)="onSearch()"
+              class="btn btn-primary btn-lg rounded-3 px-4 d-flex align-items-center justify-content-center gap-2"
+            >
+              Search Parts
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="row g-4">
+          <div class="col-12 col-sm-4" *ngFor="let stat of stats">
+            <div class="stat-card rounded-4 p-4 text-center">
+              <div class="mb-3">
+                <i [class]="'bi ' + stat.icon + ' fs-2 text-white'"></i>
+              </div>
+              <p class="fs-3 fw-bold text-white mb-1">{{ stat.value }}</p>
+              <p class="text-light opacity-75 mb-0">{{ stat.label }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+<footer class="footer-section py-5">
+  <div class="container">
+    <!-- Main Footer Content -->
+    <div class="row g-4 mb-4">
+      <!-- Brand Section -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <a routerLink="/" class="d-inline-block mb-3">
+          <img [src]="logoImage" alt="GearZone" height="32" />
+        </a>
+        <p class="text-secondary">
+          Your trusted marketplace for quality car spare parts
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-6 col-lg-3">
+        <h5 class="text-white fw-semibold mb-3">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2" *ngFor="let link of quickLinks">
+            <a
+              [routerLink]="link.routerLink"
+              class="text-secondary text-decoration-none footer-link"
+            >
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div class="col-6 col-lg-3">
+        <h5 class="text-white fw-semibold mb-3">Support</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2" *ngFor="let link of supportLinks">
+            <a
+              [routerLink]="link.routerLink"
+              class="text-secondary text-decoration-none footer-link"
+            >
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <h5 class="text-white fw-semibold mb-3">Legal</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2" *ngFor="let link of legalLinks">
+            <a
+              [routerLink]="link.routerLink"
+              class="text-secondary text-decoration-none footer-link"
+            >
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-top border-secondary pt-4">
+      <p class="text-secondary text-center mb-0">
+        © {{ currentYear }} GearZone. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

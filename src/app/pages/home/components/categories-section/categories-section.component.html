@@ -1,0 +1,35 @@
+<section class="categories-section py-5 bg-light">
+  <div class="container py-4">
+    <!-- Header -->
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold text-dark mb-3">
+        Browse by Category
+      </h2>
+      <p class="text-secondary fs-6">
+        Explore our wide range of automotive parts organized by category
+      </p>
+    </div>
+
+    <!-- Categories Grid -->
+    <div class="row g-4">
+      <div class="col-12 col-sm-6 col-lg-3" *ngFor="let category of categories">
+        <a
+          [routerLink]="['/products']"
+          [queryParams]="{ category: category.name }"
+          class="category-card card h-100 border rounded-4 p-4 text-decoration-none"
+        >
+          <div
+            class="category-icon rounded-4 d-flex align-items-center justify-content-center mb-3"
+            [ngClass]="category.bgColorClass"
+          >
+            <span class="fs-2">{{ category.emoji }}</span>
+          </div>
+          <h3 class="fs-5 fw-semibold text-dark mb-1">
+            {{ category.name }}
+          </h3>
+          <p class="text-secondary mb-0">{{ category.itemCount }}</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
