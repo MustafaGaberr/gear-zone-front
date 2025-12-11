@@ -1,0 +1,31 @@
+<div class="auth-background">
+    <div class="login-container">
+        <img src="assets/images/logo.png" alt="GearZone Logo">
+        <div class="login-form">
+            <div class="header">
+                <h1>Welcome Back</h1>
+                <p>Login to your account</p>
+            </div>
+            <div class="input-field">
+                <p>Email Address</p>
+                <div class="input-wrapper">
+                    <mat-icon class="input-icon">email</mat-icon>
+                    <input type="text" placeholder="your@email.com">
+                </div>
+            </div>
+            <div class="input-field">
+                <p>Password</p>
+                <div class="input-wrapper">
+                    <mat-icon class="input-icon">lock</mat-icon>
+                    <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter your password">
+                    <button type="button" class="eye-btn" (click)="togglePasswordVisibility()">
+                        <mat-icon class="eye-icon">{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <p class="forget">Forgot password?</p>
+            <button class="login-btn">Login</button>
+            <p class="no-account">Don't have an account? <span><a routerLink="/register">Register</a></span></p>
+        </div>
+    </div>
+</div>

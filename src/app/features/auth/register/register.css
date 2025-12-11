@@ -1,0 +1,405 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+.auth-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #2A56C4 20%, #1A202C 60%, #2D3748 100%);
+    background-size: 200% 200%;
+    animation: gradient-animation 10s ease infinite;
+    padding: 20px;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.register-container img {
+    width: 178px;
+    height: 35px;
+    margin-bottom: 10px;
+}
+
+.register-form {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    border-radius: 16px;
+    align-items: center;
+}
+
+.register-form .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.register-form .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #1A202C;
+}
+
+.register-form .header p {
+    color: #9CA3AF;
+}
+
+/* Angular Material Stepper Custom Styles */
+.custom-stepper {
+    width: 100%;
+    background: transparent;
+}
+
+::ng-deep .custom-stepper .mat-horizontal-stepper-header-container {
+    margin-bottom: 24px;
+}
+
+::ng-deep .custom-stepper .mat-step-header {
+    padding: 0 16px;
+}
+
+::ng-deep .custom-stepper .mat-step-icon {
+    background-color: #E5E7EB;
+    color: #9CA3AF;
+}
+
+::ng-deep .custom-stepper .mat-step-icon-selected,
+::ng-deep .custom-stepper .mat-step-icon-state-done,
+::ng-deep .custom-stepper .mat-step-icon-state-edit {
+    background-color: #1A73E8;
+    color: #ffffff;
+}
+
+::ng-deep .custom-stepper .mat-step-label {
+    color: #9CA3AF;
+    font-weight: 500;
+}
+
+::ng-deep .custom-stepper .mat-step-label-selected {
+    color: #1A73E8;
+    font-weight: 600;
+}
+
+::ng-deep .custom-stepper .mat-horizontal-content-container {
+    padding: 0;
+}
+
+::ng-deep .custom-stepper .mat-stepper-horizontal-line {
+    border-top-color: #E5E7EB;
+}
+
+/* Form Styles */
+.name-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.input-field {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.input-field.half {
+    flex: 1;
+}
+
+.input-field p {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #374151;
+    font-size: 14px;
+}
+
+.input-field .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-field .input-wrapper .input-icon {
+    position: absolute;
+    left: 14px;
+    color: #9CA3AF;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.input-field .input-wrapper input {
+    width: 100%;
+    height: 48px;
+    border-radius: 12px;
+    outline: none;
+    border: 2px solid #E5E7EB;
+    padding: 12px 48px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.input-field .input-wrapper input:focus {
+    border-color: #1A73E8;
+}
+
+.input-field .input-wrapper input::placeholder {
+    color: #9CA3AF;
+}
+
+.eye-btn {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eye-btn:hover .eye-icon {
+    color: #1A73E8;
+}
+
+.eye-icon {
+    color: #9CA3AF;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    transition: color 0.2s ease;
+}
+
+.continue-btn {
+    background-color: #1A73E8;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.continue-btn:hover:not(:disabled) {
+    background-color: #1557B0;
+}
+
+.continue-btn:disabled {
+    background-color: #9CA3AF;
+    cursor: not-allowed;
+}
+
+/* Step 2 Styles */
+.choose-account-type {
+    font-size: 16px;
+    color: #374151;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+}
+
+.account-type-option {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px;
+    border: 2px solid #E5E7EB;
+    border-radius: 12px;
+    width: 100%;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.account-type-option:hover {
+    border-color: #1A73E8;
+    background-color: #F8FAFC;
+}
+
+.account-type-option.selected {
+    border-color: #1A73E8;
+    background-color: #EFF6FF;
+}
+
+.account-type-option .icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background-color: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.account-type-option .icon-wrapper mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    color: #6B7280;
+}
+
+.account-type-option.selected .icon-wrapper {
+    background-color: #1A73E8;
+}
+
+.account-type-option.selected .icon-wrapper mat-icon {
+    color: #ffffff;
+}
+
+.account-type-option .text-content {
+    flex: 1;
+}
+
+.account-type-option .text-content h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1A202C;
+    margin-bottom: 4px;
+}
+
+.account-type-option .text-content p {
+    font-size: 13px;
+    color: #6B7280;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-top: 24px;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background-color: transparent;
+    color: #6B7280;
+    border: 2px solid #E5E7EB;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.back-btn mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.back-btn:hover {
+    border-color: #9CA3AF;
+    color: #374151;
+}
+
+.submit-btn {
+    flex: 1;
+    background-color: #1A73E8;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #1557B0;
+}
+
+.submit-btn:disabled {
+    background-color: #9CA3AF;
+    cursor: not-allowed;
+}
+
+.has-account {
+    color: #6B7280;
+    margin-top: 20px;
+}
+
+.has-account span a {
+    color: #1A73E8;
+    font-weight: 500;
+}
+
+.has-account span a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+    .register-form {
+        padding: 24px 16px;
+    }
+    
+    .register-form .header h1 {
+        font-size: 24px;
+    }
+
+    .name-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .input-field.half {
+        width: 100%;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .back-btn {
+        order: 2;
+    }
+
+    .submit-btn {
+        order: 1;
+    }
+}

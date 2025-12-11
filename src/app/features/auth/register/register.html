@@ -1,0 +1,110 @@
+<div class="auth-background">
+    <div class="register-container">
+        <img src="assets/images/logo.png" alt="GearZone Logo">
+        <div class="register-form">
+            <div class="header">
+                <h1>Create Account</h1>
+                <p>Join GearZone today</p>
+            </div>
+
+            <mat-stepper #stepper linear class="custom-stepper">
+                <!-- Step 1: Account Information -->
+                <mat-step [stepControl]="accountInfoForm" label="Account Info">
+                    <form [formGroup]="accountInfoForm">
+                        <div class="name-row">
+                            <div class="input-field half">
+                                <p>First Name</p>
+                                <div class="input-wrapper">
+                                    <mat-icon class="input-icon">person</mat-icon>
+                                    <input type="text" placeholder="John" formControlName="firstName">
+                                </div>
+                            </div>
+                            <div class="input-field half">
+                                <p>Last Name</p>
+                                <div class="input-wrapper">
+                                    <mat-icon class="input-icon">person</mat-icon>
+                                    <input type="text" placeholder="Doe" formControlName="lastName">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-field">
+                            <p>Email Address</p>
+                            <div class="input-wrapper">
+                                <mat-icon class="input-icon">email</mat-icon>
+                                <input type="email" placeholder="your@email.com" formControlName="email">
+                            </div>
+                        </div>
+                        
+                        <div class="input-field">
+                            <p>Password</p>
+                            <div class="input-wrapper">
+                                <mat-icon class="input-icon">lock</mat-icon>
+                                <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter your password" formControlName="password">
+                                <button type="button" class="eye-btn" (click)="togglePasswordVisibility()">
+                                    <mat-icon class="eye-icon">{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="input-field">
+                            <p>Confirm Password</p>
+                            <div class="input-wrapper">
+                                <mat-icon class="input-icon">lock</mat-icon>
+                                <input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm your password" formControlName="confirmPassword">
+                                <button type="button" class="eye-btn" (click)="toggleConfirmPasswordVisibility()">
+                                    <mat-icon class="eye-icon">{{ showConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="button" class="continue-btn" matStepperNext [disabled]="accountInfoForm.invalid">Continue</button>
+                    </form>
+                </mat-step>
+
+                <!-- Step 2: Account Type -->
+                <mat-step [stepControl]="accountTypeForm" label="Account Type">
+                    <form [formGroup]="accountTypeForm">
+                        <p class="choose-account-type">Choose your account type</p>
+                        
+                        <div class="account-type-option" 
+                             [class.selected]="selectedAccountType === 'regular'" 
+                             (click)="selectAccountType('regular')">
+                            <div class="icon-wrapper">
+                                <mat-icon>inventory_2</mat-icon>
+                            </div>
+                            <div class="text-content">
+                                <h3>Regular User</h3>
+                                <p>Browse and purchase car parts from verified sellers</p>
+                            </div>
+                        </div>
+                        
+                        <div class="account-type-option" 
+                             [class.selected]="selectedAccountType === 'seller'" 
+                             (click)="selectAccountType('seller')">
+                            <div class="icon-wrapper">
+                                <mat-icon>storefront</mat-icon>
+                            </div>
+                            <div class="text-content">
+                                <h3>Seller Account</h3>
+                                <p>List and sell your car parts to thousands of buyers</p>
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button type="button" class="back-btn" matStepperPrevious>
+                                <mat-icon>arrow_back</mat-icon>
+                                Go Back
+                            </button>
+                            <button type="button" class="submit-btn" (click)="onSubmit()" [disabled]="!selectedAccountType">
+                                Create Account
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+            </mat-stepper>
+
+            <p class="has-account">Already have an account? <span><a routerLink="/login">Login</a></span></p>
+        </div>
+    </div>
+</div>

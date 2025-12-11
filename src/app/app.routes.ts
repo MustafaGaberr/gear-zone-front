@@ -1,15 +1,13 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { DashboardShellComponent } from './pages/dashboard/dashboard-shell/dashboard-shell.component';
-import { Login } from './shared/components/login/login';
-import { Register } from './shared/components/register/register';
-import { Regster2 } from './shared/components/regster2/regster2';
+import { Login } from './features/auth/login/login';
+import { Register } from './features/auth/register/register';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
-  { path: 'regster2', component: Regster2 },
   {
     path: 'dashboard',
     component: DashboardShellComponent,
