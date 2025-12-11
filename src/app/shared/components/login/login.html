@@ -1,0 +1,35 @@
+<div class="boby">
+    <div class="login-container">
+        <img src="assets/images/logo.png" alt="">
+        <div class="login-form">
+            <div class="header">
+                <h1>Welcome Back</h1>
+                <p>Login to your account</p>
+            </div>
+            <div class="input-field login">
+                <p>Email Address</p>
+                <div class="input-wrapper">
+                    <span>
+                        <fa-icon [icon]="faEnvelope" class="emial-icon" ></fa-icon>
+                    </span>
+                    <input type="text" placeholder="your@emial.com">
+                </div>
+            </div>
+            <div class="input-field password">
+                <p>Password</p>
+                <div class="input-wrapper">
+                    <span>
+                        <fa-icon [icon]="faLock" class="password-icon"></fa-icon>
+                    </span>
+                    <input type="password" placeholder="Enter your password">
+                    <span>
+                        <fa-icon [icon]="faEye" class="eye-icon"></fa-icon>
+                    </span>
+                </div>
+            </div>
+            <p class="forget">Forget the password</p>
+            <button class="login-btn">Login</button>
+            <p class="no-account">Don't have an account? <span ><a routerLink="/register">Register</a></span></p>
+        </div>
+    </div>
+</div>
