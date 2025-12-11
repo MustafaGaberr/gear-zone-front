@@ -1,0 +1,78 @@
+<div class="boby active">
+    <div class="login-container">
+        <img src="assets/images/logo.png" alt="">
+        <div class="login-form">
+            <div class="header">
+                <h1>Create Account</h1>
+                <p>Join GearZone today</p>
+            </div>
+            <div class="steps">
+                <span class="step-1 active-step">1</span>
+                <span class="step-"></span>
+                <span class="step-2">2</span>
+
+            </div>
+
+            <div>
+                <div class="name">
+                    <div class="input-field">
+                        <p>First Name</p>
+                        <div class="input-wrapper">
+                            <span>
+                                <fa-icon [icon]="faUser" class="user-icon" ></fa-icon>
+                            </span>
+                            <input class="fName" type="text" placeholder="John">
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <p>Second Name</p>
+                        <div class="input-wrapper">
+                            <span>
+                                <fa-icon [icon]="faUser" class="user-icon" ></fa-icon>
+                            </span>
+                            <input class="fName" type="text" placeholder="Doe">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="input-field login">
+                    <p>Email Address</p>
+                    <div class="input-wrapper">
+                        <span>
+                            <fa-icon [icon]="faEnvelope" class="emial-icon" ></fa-icon>
+                        </span>
+                        <input type="text" placeholder="your@emial.com">
+                    </div>
+                </div>
+                <div class="input-field password">
+                    <p>Password</p>
+                    <div class="input-wrapper">
+                        <span>
+                            <fa-icon [icon]="faLock" class="password-icon"></fa-icon>
+                        </span>
+                        <input type="password" placeholder="Enter your password">
+                        <span>
+                            <fa-icon [icon]="faEye" class="eye-icon"></fa-icon>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="input-field password">
+                    <p>Confirm Password</p>
+                    <div class="input-wrapper">
+                        <span>
+                            <fa-icon [icon]="faLock" class="password-icon"></fa-icon>
+                        </span>
+                        <input type="password" placeholder="Confirm your password">
+                        <span>
+                            <fa-icon [icon]="faEye" class="eye-icon"></fa-icon>
+                        </span>
+                    </div>
+                </div>
+                <button class="login-btn" (click)="nextStep()">Continue</button>
+            </div>
+            
+            <p class="no-account">Already have an account? <span ><a routerLink="/login">Login</a></span></p>
+        </div>
+    </div>
+</div>
