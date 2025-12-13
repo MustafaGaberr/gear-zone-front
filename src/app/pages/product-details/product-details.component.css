@@ -1,0 +1,208 @@
+:root {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* --bs-body-bg: #f8f9fa; */
+    background-color: #F9FAFB;
+}
+
+.card-body {
+    background-color: white;
+    border-radius: 1.5rem;
+    /* box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1); */
+}
+
+.current-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+.original-price {
+    font-size: 1.25rem;
+    text-decoration: line-through;
+}
+
+.save-percent {
+    background-color: #ffe8e8;
+    color: #dc3545;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.main-image {
+    /* aspect-ratio: 1 / 1; */
+    /* object-fit: cover; */
+        width: 100%;
+}
+
+.thumbnail-images {
+    display: flex;
+    gap: 12px;
+}
+
+.thumbnail-images .img-thumbnail {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    padding: 0;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.thumbnail-images .img-thumbnail.active {
+    border-color: #0d6efd;
+}
+
+.quantity-buttons .btn {
+    padding: 0.5rem 1rem;
+}
+
+.quantity-buttons .btn.disabled {
+    background-color: transparent;
+    border-color: #dee2e6;
+}
+
+/* Styling for Key Features to be a distinct block */
+.key-features {
+    border: 1px solid #f0f2f5;
+}
+
+.key-features ul {
+    list-style: none;
+    padding-left: 0;
+    color: #344054;
+    font-weight: 500;
+}
+
+.key-features li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 12px !important;
+}
+
+.key-features li:last-child {
+    margin-bottom: 0 !important;
+}
+
+.key-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #e0f2e9;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23198754' class='bi bi-check' viewBox='0 0 16 16'%3E%3Cpath d='M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Styling for service cards to look like individual cards */
+.service-card {
+    background-color: white;
+    border: 1px solid #e3e2e6;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.08) !important;
+}
+
+.seller-card {
+    background-color: #f8f9fa !important;
+    border: 1px solid #f0f2f5;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: rgba(0,0,0,0.02);
+}
+
+.btn-primary {
+    padding: 0.75rem 1.5rem;
+}
+
+.btn-outline-secondary {
+    padding: 0.75rem 1rem;
+}
+.product-card {
+  transition: all 0.3s ease;
+  border-color: #e5e7eb !important;
+}
+
+.product-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: #1a73e8 !important;
+  transform: translateY(-4px);
+}
+
+.product-card:hover .product-title {
+  color: #1a73e8 !important;
+}
+
+.product-image {
+  height: 220px;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.bg-orange {
+  background-color: #f97316 !important;
+}
+
+.text-primary {
+  color: #1a73e8 !important;
+}
+
+.view-all-link {
+  color: #1a73e8 !important;
+  font-weight: 500;
+}
+
+.view-all-link:hover {
+  text-decoration: underline !important;
+}
+.active-thumb {
+  border: 2px solid #0d6efd !important; 
+  opacity: 1 !important;
+}
+
+.img-thumbnail {
+  transition: all 0.5s ease;
+  opacity: 0.7; 
+}
+.btn-contact {
+  /* 1. النعومة: أي تغيير ياخد نص ثانية */
+  transition: all 0.4s ease; 
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-contact:hover {
+  background-color: #0d6efd !important; 
+  color: #fff !important;
+  border-color: #0d6efd !important;
+
+  box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+}

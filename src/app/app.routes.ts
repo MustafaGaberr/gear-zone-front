@@ -8,11 +8,16 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
+    {
+    path: 'product-details/:id',
+    loadComponent: () => import('./pages/product-details/product-details.component').then(m => m.ProductDetailsComponent)
+  },
   {
     path: 'dashboard',
     component: DashboardShellComponent,
     children: [
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
+      
       {
         path: 'profile',
         loadComponent: () => import('./pages/dashboard/profile/profile.component').then(m => m.ProfileComponent)
@@ -33,6 +38,7 @@ export const routes: Routes = [
         path: 'messages',
         loadComponent: () => import('./pages/dashboard/messages/messages.component').then(m => m.MessagesComponent)
       },
+    
     ]
   },
   { path: '**', redirectTo: '' }
