@@ -5,6 +5,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +27,7 @@ export class Register {
   accountInfoForm: FormGroup;
   accountTypeForm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(private router: Router,private authService: AuthService, private fb: FormBuilder) {
     this.accountInfoForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -53,13 +54,29 @@ export class Register {
     this.accountTypeForm.patchValue({ accountType: type });
   }
 
-  onSubmit() {
-    if (this.accountInfoForm.valid && this.accountTypeForm.valid) {
-      console.log('Form submitted:', {
-        ...this.accountInfoForm.value,
-        accountType: this.selectedAccountType
-      });
-      // Handle registration logic here
-    }
+ onSubmit() {
+  if (this.accountInfoForm.valid && this.selectedAccountType) {
+    
+    const info = this.accountInfoForm.value;
+
+    const registerData = {
+      name: `${info.firstName} ${info.lastName}`.trim(), 
+      email: info.email,
+      password: info.password,
+      role: this.selectedAccountType 
+    };
+
+    console.log('Sending payload:', registerData);
+
+    this.authService.signup(registerData).subscribe({
+      next: (response) => {
+        console.log('Signup successful', response);
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Signup failed', error);
+      },
+    });
   }
+}
 }
