@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark sticky-top" [ngClass]="transparent ? 'bg-transparent' : 'navbar-bg shadow'">
   <div class="container">
     <!-- Logo -->
-    <a routerLink="/" class="navbar-brand">
+    <a routerLink="/home" class="navbar-brand">
       <img [src]="logoImage" alt="GearZone" height="40" />
     </a>
 
@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': isMobileMenuOpen }">
       <ul class="navbar-nav mx-auto mb-2 mb-md-0">
         <li class="nav-item">
-          <a routerLink="/" class="nav-link nav-link-custom" (click)="closeMobileMenu()">Home</a>
+          <a routerLink="/home" class="nav-link nav-link-custom" (click)="closeMobileMenu()">Home</a>
         </li>
         <li class="nav-item">
           <a routerLink="/products" class="nav-link nav-link-custom" (click)="closeMobileMenu()">Products</a>
@@ -101,7 +101,8 @@
         </ng-template>
 
         <!-- Cart -->
-        <button
+        <button 
+         routerLink="/cart"
           (click)="toggleCart()"
           class="btn btn-link text-white p-0 position-relative"
         >
