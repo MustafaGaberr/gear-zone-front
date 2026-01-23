@@ -51,30 +51,18 @@ export class Login  implements OnInit{
       this.authService.getLoginApi(loginData).subscribe({
         next: (res) => {
           if (res.status === 'success') {
-            // console.log('Login successful:', res.data);
+            
             this.cookieService.set('token',res.data.token)
-            // لو عندك toastrService شغليها
+            
             this.toastrService.success('Login successful');
-            this.router.navigate(['/home']); // غير المسار حسب المشروع
+            this.router.navigate(['/home']); 
           } 
         }
       });
-    } else {
-      console.log('Form is invalid');
-      // this.toastrService.warning('Please fill the form correctly');
-    }
+    } 
   }
 
-  // constructor(
-  //   private fb: FormBuilder,
-  //   private authService: AuthService,
-  //   private router: Router
-  // ) {
-  //   this.loginForm = this.fb.group({
-  //     email: ['', [Validators.required, Validators.email]],
-  //     password: ['', Validators.required],
-  //   });
-  // }
+ 
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
