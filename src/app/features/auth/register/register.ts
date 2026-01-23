@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl, AbstractControl } from '@angular/forms';
 
 import { AuthService } from '../../../core/services/auth.service';
-// import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,7 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatStepperModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule],
+    MatButtonModule,RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
@@ -39,7 +39,7 @@ export class Register implements OnInit {
   private readonly route = inject(Router)
   private readonly fb = inject(FormBuilder)
   private readonly changeDetectorRef = inject(ChangeDetectorRef)
-  // private readonly toastrService=inject(ToastrService)
+  private readonly toastrService=inject(ToastrService)
 
   initForms(): void {
     this.accountInfoForm = new FormGroup({
@@ -86,16 +86,13 @@ export class Register implements OnInit {
     }
   }
   register() {
-  // console.log('Register clicked');
-  // console.log('Form valid?', this.accountInfoForm.valid, this.accountTypeForm.valid);
-
   if (this.accountInfoForm.valid && this.accountTypeForm.valid) {
     const registerData = {
       ...this.accountInfoForm.value,
       role: this.accountTypeForm.get('accountType')?.value
     };
 
-    // console.log('Sending data:', registerData);
+
 
     this.authService.getRegisterApi(registerData).subscribe({
       next: (res) => {

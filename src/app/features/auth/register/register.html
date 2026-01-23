@@ -51,13 +51,13 @@
                                 @if(lnamecontrole?.errors&& lnamecontrole?.touched){
                                         <div class="alert p-1 alert-danger " role="alert">
                                             <ul class="m-0 list-unstyled small text-danger">
-                                                @if(fnamecontrol?.getError('required')) {
+                                                @if(lnamecontrole?.getError('required')) {
                                                 <li>First Name is required</li>
                                                 }
-                                                @if(fnamecontrol?.getError('minlength')) {
+                                                @if(lnamecontrole?.getError('minlength')) {
                                                 <li>at least 3 characters</li>
                                                 }
-                                                @if(fnamecontrol?.getError('maxlength')) {
+                                                @if(lnamecontrole?.getError('maxlength')) {
                                                 <li> exceed 10 characters</li>
                                                 }
                                             </ul>
@@ -93,10 +93,10 @@
                             @if(emailcontrole?.errors && emailcontrole?.touched){
                                 <div class="alert p-1 alert-danger " role="alert">
                                     <ul class="m-0 list-unstyled small text-danger">
-                                        @if(fnamecontrol?.getError('required')) {
+                                        @if(emailcontrole?.getError('required')) {
                                         <li>Email is required</li>
                                         }
-                                        @if(fnamecontrol?.getError('email')) {
+                                        @if(emailcontrole?.getError('email')) {
                                         <li>Please enter a valid email format (e.g., user@example.com).</li>
                                         }
                                     

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators, FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
@@ -16,7 +16,8 @@ import { CookieService } from 'ngx-cookie-service';
     MatStepperModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule],
+    MatButtonModule,RouterLink],
+    
   templateUrl: './login.html',
   styleUrl: './login.css', // صححت styleUrls
 })

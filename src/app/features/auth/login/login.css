@@ -48,8 +48,8 @@ a {
 .login-form {
     background-color: #ffffff;
     width: 448px;
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     padding: 32px;
     border-radius: 16px;
     align-items: center;
