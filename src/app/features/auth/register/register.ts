@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl, AbstractControl } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -19,27 +19,41 @@ import { AuthService } from '../auth.service';
     }
   ]
 })
-export class Register {
+export class Register implements OnInit {
   showPassword = false;
   showConfirmPassword = false;
   selectedAccountType: string | null = null;
+  resulat:string=''
+
+  accountInfoForm!: FormGroup;
+  accountTypeForm!: FormGroup;
   
-  accountInfoForm: FormGroup;
-  accountTypeForm: FormGroup;
 
-  constructor(private router: Router,private authService: AuthService, private fb: FormBuilder) {
-    this.accountInfoForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
-    });
+  private readonly authService = inject(AuthService)
+  private readonly route = inject(Router)
+  private readonly fb = inject(FormBuilder)
+  private readonly changeDetectorRef = inject(ChangeDetectorRef)
 
-    this.accountTypeForm = this.fb.group({
-      accountType: ['', Validators.required]
+  initForms(): void {
+    this.accountInfoForm = new FormGroup({
+      firstName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
+      lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
+      userName:new FormControl('',[Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.pattern((/^(?=.*[a-z])(?=.*[A-Z]).{8,}$/))]),
+      confirmPassword: new FormControl('', [Validators.required, Validators.pattern(/^[A-Z](?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{7,}$/)]),
+      phone:new FormControl('',[Validators.required,Validators.pattern(/^01[0125][0-9]{8}$/)])
+    },{validators:this.confirmPassword});
+
+    this.accountTypeForm = new FormGroup({
+      accountType: new FormControl('', Validators.required)
     });
   }
+ 
+  ngOnInit(): void {
+    this.initForms()
+  }
+
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -54,29 +68,43 @@ export class Register {
     this.accountTypeForm.patchValue({ accountType: type });
   }
 
- onSubmit() {
-  if (this.accountInfoForm.valid && this.selectedAccountType) {
-    
-    const info = this.accountInfoForm.value;
+  confirmPassword(group:AbstractControl){
+    let password=group.get('password')?.value
+    let confirmPassword=group.get('confirmPassword')?.value
 
+    if(password=== confirmPassword){
+      return null;
+    }else{
+      return { mismatch: true }
+    }
+  }
+  register() {
+  // console.log('Register clicked');
+  // console.log('Form valid?', this.accountInfoForm.valid, this.accountTypeForm.valid);
+
+  if (this.accountInfoForm.valid && this.accountTypeForm.valid) {
     const registerData = {
-      name: `${info.firstName} ${info.lastName}`.trim(), 
-      email: info.email,
-      password: info.password,
-      role: this.selectedAccountType 
+      ...this.accountInfoForm.value,
+      role: this.accountTypeForm.get('accountType')?.value
     };
 
-    console.log('Sending payload:', registerData);
+    // console.log('Sending data:', registerData);
 
-    this.authService.signup(registerData).subscribe({
-      next: (response) => {
-        console.log('Signup successful', response);
-        this.router.navigate(['/login']);
+    this.authService.getRegisterApi(registerData).subscribe({
+      next: (res) => {
+        if(res.status==='success')
+          {
+           
+            this.resulat=res.data.user
+             console.log('Success response:', this.resulat);
+            this.route.navigate(['/login'])
+
+          }
       },
-      error: (error) => {
-        console.error('Signup failed', error);
-      },
+      
     });
   }
 }
+
+
 }

@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -26,19 +26,19 @@ export class Login {
     });
   }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (response) => {
-          console.log('Login successful', response);
-          this.router.navigate(['/']);
-        },
-        error: (error) => {
-          console.error('Login failed', error);
-        },
-      });
-    }
-  }
+  // onSubmit() {
+  //   if (this.loginForm.valid) {
+  //     this.authService.login(this.loginForm.value).subscribe({
+  //       next: (response) => {
+  //         console.log('Login successful', response);
+  //         this.router.navigate(['/']);
+  //       },
+  //       error: (error) => {
+  //         console.error('Login failed', error);
+  //       },
+  //     });
+  //   }
+  // }
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }

@@ -31,7 +31,6 @@ export class NavbarComponent {
   @Input() messages = 0;
 
   isMobileMenuOpen = false;
-  isCartOpen = false;
   isNotificationOpen = false;
 
   // In Angular you'll need to have this image in assets, e.g. src/assets/images/GZ-Logo.png
@@ -45,9 +44,7 @@ export class NavbarComponent {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
-  toggleCart(): void {
-    this.isCartOpen = !this.isCartOpen;
-  }
+
 
   toggleNotification(): void {
     this.isNotificationOpen = !this.isNotificationOpen;
@@ -57,9 +54,7 @@ export class NavbarComponent {
     this.isMobileMenuOpen = false;
   }
 
-  closeCart(): void {
-    this.isCartOpen = false;
-  }
+
 
   closeNotification(): void {
     this.isNotificationOpen = false;

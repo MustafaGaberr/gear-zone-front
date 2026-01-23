@@ -16,7 +16,7 @@ export const routes: Routes = [
   },
   {
     path:'',component:BlanckLayout,children:[
-        {path:'home', loadComponent: () => import('./pages/home/home.component').then(m=>m.HomeComponent)},
+      {path:'home', loadComponent: () => import('./pages/home/home.component').then(m=>m.HomeComponent)},
        {
           path: 'product-details',
           loadComponent: () => import('./pages/product-details/product-details.component').then(m => m.ProductDetailsComponent)
