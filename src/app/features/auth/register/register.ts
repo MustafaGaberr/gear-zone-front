@@ -1,23 +1,29 @@
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, NgModule, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
-import { MatStepperModule } from '@angular/material/stepper';
+
+
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl, AbstractControl } from '@angular/forms';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+
 import { AuthService } from '../../../core/services/auth.service';
+// import { ToastrService } from 'ngx-toastr';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @Component({
   selector: 'app-register',
-  imports: [RouterLink, MatIconModule, MatStepperModule, CommonModule, ReactiveFormsModule],
+  imports: [CommonModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule],
   templateUrl: './register.html',
   styleUrl: './register.css',
-  providers: [
-    {
-      provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { showError: true }
-    }
-  ]
 })
 export class Register implements OnInit {
   showPassword = false;
@@ -33,6 +39,7 @@ export class Register implements OnInit {
   private readonly route = inject(Router)
   private readonly fb = inject(FormBuilder)
   private readonly changeDetectorRef = inject(ChangeDetectorRef)
+  // private readonly toastrService=inject(ToastrService)
 
   initForms(): void {
     this.accountInfoForm = new FormGroup({
@@ -97,7 +104,9 @@ export class Register implements OnInit {
            
             this.resulat=res.data.user
              console.log('Success response:', this.resulat);
+            //  this.toastrService.success('sucess')
             this.route.navigate(['/login'])
+
 
           }
       },

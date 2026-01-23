@@ -1,44 +1,81 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators, FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
-
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
-  imports: [RouterLink, MatIconModule, CommonModule, ReactiveFormsModule],
+  imports:[CommonModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrl: './login.css', // صححت styleUrls
 })
-export class Login {
+export class Login  implements OnInit{
   showPassword = false;
- loginForm: FormGroup;
+  loginForm!: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+  private readonly router=inject(Router)
+  private readonly cookieService=inject(CookieService)
+  
+  private readonly authService = inject(AuthService)
+  private readonly toastrService=inject(ToastrService)
+
+
+  initForms(): void {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.pattern((/^(?=.*[a-z])(?=.*[A-Z]).{8,}$/))]),
+      
     });
+
+    
   }
 
-  // onSubmit() {
-  //   if (this.loginForm.valid) {
-  //     this.authService.login(this.loginForm.value).subscribe({
-  //       next: (response) => {
-  //         console.log('Login successful', response);
-  //         this.router.navigate(['/']);
-  //       },
-  //       error: (error) => {
-  //         console.error('Login failed', error);
-  //       },
-  //     });
-  //   }
+  ngOnInit(): void {
+    this.initForms()
+  }
+  login() {
+    if (this.loginForm.valid) {
+      const loginData = this.loginForm.value;
+
+      this.authService.getLoginApi(loginData).subscribe({
+        next: (res) => {
+          if (res.status === 'success') {
+            // console.log('Login successful:', res.data);
+            this.cookieService.set('token',res.data.token)
+            // لو عندك toastrService شغليها
+            this.toastrService.success('Login successful');
+            this.router.navigate(['/home']); // غير المسار حسب المشروع
+          } 
+        }
+      });
+    } else {
+      console.log('Form is invalid');
+      // this.toastrService.warning('Please fill the form correctly');
+    }
+  }
+
+  // constructor(
+  //   private fb: FormBuilder,
+  //   private authService: AuthService,
+  //   private router: Router
+  // ) {
+  //   this.loginForm = this.fb.group({
+  //     email: ['', [Validators.required, Validators.email]],
+  //     password: ['', Validators.required],
+  //   });
   // }
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }

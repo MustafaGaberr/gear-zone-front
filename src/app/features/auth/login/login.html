@@ -6,25 +6,66 @@
                 <h1>Welcome Back</h1>
                 <p>Login to your account</p>
             </div>
-            <div class="input-field">
-                <p>Email Address</p>
-                <div class="input-wrapper">
-                    <mat-icon class="input-icon">email</mat-icon>
-                    <input type="text" placeholder="your@email.com">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <div>
+                      <div class="input-field">
+                            @let emailcontrole=loginForm.get('email');
+                            <p>Email Address</p>
+                            <div class="input-wrapper">
+                                <mat-icon class="input-icon">email</mat-icon>
+                                <input [class]="{'border-success':emailcontrole?.valid ,'border-danger':emailcontrole?.invalid && emailcontrole?.touched}" type="email" placeholder="your@email.com" formControlName="email">
+                            </div>  
+                            @if(emailcontrole?.errors && emailcontrole?.touched){
+                                <div class="alert p-1 alert-danger " role="alert">
+                                    <ul class="m-0 list-unstyled small text-danger">
+                                        @if(emailcontrole?.getError('required')) {
+                                        <li>Email is required</li>
+                                        }
+                                        @if(emailcontrole?.getError('email')) {
+                                        <li>Please enter a valid email format (e.g., user@example.com).</li>
+                                        }
+                                    
+                                    </ul>
+                                </div>
+                            }
+                            
+
+                  </div>
+                <div class="input-field">
+                            @let passwordcontrole=loginForm.get('password');
+                            <p>Password</p>
+                            <div class="input-wrapper">
+                                <mat-icon class="input-icon">lock</mat-icon>
+                                <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter your password"
+                                    formControlName="password"   [class]="{'border-success':passwordcontrole?.valid ,'border-danger':passwordcontrole?.invalid && passwordcontrole?.touched}">
+                                <button type="button" class="eye-btn" (click)="togglePasswordVisibility()">
+                                    <mat-icon class="eye-icon">{{ showPassword ? 'visibility' : 'visibility_off'
+                                        }}</mat-icon>
+                                </button>
+
+                            </div>
+                            @if (passwordcontrole?.errors && passwordcontrole?.touched) {
+                                <div class="alert p-1 alert-danger " role="alert">
+                                    <ul class="m-0 list-unstyled small text-danger">
+                                        @if(passwordcontrole?.getError('required')) {
+                                        <li>Password is required</li>
+                                        }
+                                        @if(passwordcontrole?.getError('pattern')){
+                                           <li>Password must contain at least 1 uppercase and 1 lowercase character and must be at least 8 characters"</li>
+                                        } 
+                                    </ul>
+                                </div>
+
+                            }
                 </div>
-            </div>
-            <div class="input-field">
-                <p>Password</p>
-                <div class="input-wrapper">
-                    <mat-icon class="input-icon">lock</mat-icon>
-                    <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter your password">
-                    <button type="button" class="eye-btn" (click)="togglePasswordVisibility()">
-                        <mat-icon class="eye-icon">{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
-                    </button>
                 </div>
-            </div>
-            <p class="forget">Forgot password?</p>
-            <button class="login-btn">Login</button>
+                
+                <p class="forget">Forgot password?</p>
+                <button class="login-btn" type="submit">Login</button>
+            </form>
+            
+            <!-- <p class="forget">Forgot password?</p>
+            <button class="login-btn" type="submit">Login</button> -->
             <p class="no-account">Don't have an account? <span><a routerLink="/register">Register</a></span></p>
         </div>
     </div>
