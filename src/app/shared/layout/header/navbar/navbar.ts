@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input , inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink ,RouterLinkActive } from '@angular/router';
 const GZLogo = 'assets/images/GZ-Logo.png';
-
+import { AuthService } from '../../../../core/services/auth.service';
 interface CartItem {
   quantity: number;
   // add other properties as needed
@@ -18,11 +18,12 @@ interface User {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink ,RouterLinkActive],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class NavbarComponent {
+  public authService = inject(AuthService);
   @Input() transparent = false;
 
   @Input() cart: CartItem[] = [];

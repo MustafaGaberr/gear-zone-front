@@ -1,11 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark sticky-top" [ngClass]="transparent ? 'bg-transparent' : 'navbar-bg shadow'">
   <div class="container">
-    <!-- Logo -->
     <a routerLink="/home" class="navbar-brand">
       <img [src]="logoImage" alt="GearZone" height="40" />
     </a>
 
-    <!-- Mobile Menu Toggle -->
     <button
       class="navbar-toggler border-0"
       type="button"
@@ -15,7 +13,6 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Desktop Navigation -->
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': isMobileMenuOpen }">
       <ul class="navbar-nav mx-auto mb-2 mb-md-0">
         <li class="nav-item">
@@ -29,44 +26,41 @@
         </li>
       </ul>
 
-      <!-- Actions -->
       <div class="d-flex align-items-center gap-3">
-        <!-- Logged-in user -->
-        <ng-container *ngIf="user; else guestLinks">
-          <!-- Notifications -->
+        
+        @if (authService.userData(); as user) {
+          
           <button
             (click)="toggleNotification()"
             class="btn btn-link text-white p-0 position-relative"
           >
             <i class="bi bi-bell fs-5"></i>
-            <span
-              *ngIf="notifications > 0"
-              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-            >
-              {{ notifications }}
-            </span>
+            
+            @if (notifications > 0) {
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ notifications }}
+              </span>
+            }
           </button>
 
-          <!-- Messages -->
           <a
-            [routerLink]="['/', user.type + '-dashboard', 'messages']"
+            [routerLink]="['/', (user.type || 'user') + '-dashboard', 'messages']"
             class="btn btn-link text-white p-0 position-relative"
           >
             <i class="bi bi-chat-dots fs-5"></i>
-            <span
-              *ngIf="messages > 0"
-              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-            >
-              {{ messages }}
-            </span>
+            
+            @if (messages > 0) {
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ messages }}
+              </span>
+            }
           </a>
 
-          <!-- Profile -->
           <a
-            [routerLink]="['/', user.type + '-dashboard', 'profile']"
+            [routerLink]="['/', (user.type || 'user') + '-dashboard', 'profile']"
             class="d-flex align-items-center gap-2 text-white text-decoration-none"
           >
-            <ng-container *ngIf="user.avatar; else defaultAvatar">
+            @if (user.avatar) {
               <img
                 [src]="user.avatar"
                 [alt]="user.name"
@@ -74,16 +68,14 @@
                 width="32"
                 height="32"
               />
-            </ng-container>
-            <ng-template #defaultAvatar>
+            } @else {
               <i class="bi bi-person-circle fs-5"></i>
-            </ng-template>
+            }
+            
             <span class="d-none d-lg-inline">{{ user.name }}</span>
           </a>
-        </ng-container>
 
-        <!-- Guest links -->
-        <ng-template #guestLinks>
+        } @else {
           <a
             routerLink="/login"
             class="nav-link nav-link-custom d-none d-md-block"
@@ -98,43 +90,42 @@
           >
             Register
           </a>
-        </ng-template>
+        }
 
-        <!-- Cart -->
         <button 
           routerLink="/cart"
           class="btn btn-link text-white p-0 position-relative"
         >
           <i class="bi bi-cart3 fs-5"></i>
-          <span
-            *ngIf="cartItemCount > 0"
-            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange"
-          >
-            {{ cartItemCount }}
-          </span>
+          
+          @if (cartItemCount > 0) {
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange">
+              {{ cartItemCount }}
+            </span>
+          }
         </button>
       </div>
 
-      <!-- Mobile Auth Buttons -->
-      <div class="d-md-none border-top border-secondary mt-3 pt-3" *ngIf="!user">
-        <div class="d-grid gap-2">
-          <a
-            routerLink="/login"
-            class="btn btn-outline-light"
-            (click)="closeMobileMenu()"
-          >
-            Login
-          </a>
-          <a
-            routerLink="/register"
-            class="btn btn-primary"
-            (click)="closeMobileMenu()"
-          >
-            Register
-          </a>
-          
+      @if (!authService.userData()) {
+        <div class="d-md-none border-top border-secondary mt-3 pt-3">
+          <div class="d-grid gap-2">
+            <a
+              routerLink="/login"
+              class="btn btn-outline-light"
+              (click)="closeMobileMenu()"
+            >
+              Login
+            </a>
+            <a
+              routerLink="/register"
+              class="btn btn-primary"
+              (click)="closeMobileMenu()"
+            >
+              Register
+            </a>
+          </div>
         </div>
-      </div>
+      }
       
     </div>
   </div>
