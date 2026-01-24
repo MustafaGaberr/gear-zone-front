@@ -95,6 +95,12 @@ constructor() {
               this.cookieService.set('user_data', JSON.stringify(userData), { path: '/' });
               this.userData.set(userData);
             }
+        if (res.data.token) {
+          this.cookieService.set('token', res.data.token, { path: '/' });
+
+          if (res.user) {
+            this.cookieService.set('user_data', JSON.stringify(res.data.user), { path: '/' });
+            this.userData.set(res.user); 
           }
         }
       })

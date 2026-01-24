@@ -1,0 +1,131 @@
+<div class="products-container">
+  <div class="main-content">
+    
+    <aside class="filters-sidebar">
+      <div class="filter-header">
+        <h3>Filters</h3>
+      </div>
+
+      <div class="filter-group">
+        <label>Search</label>
+        <div class="input-wrapper">
+          <input 
+            type="text" 
+            placeholder="Search parts..." 
+            [(ngModel)]="searchTerm" 
+            (input)="applyFilters()" 
+          />
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label>Category</label>
+        <ul class="category-list">
+          <li>
+            <a href="javascript:void(0)" 
+               (click)="onCategoryChange('all')"
+               [class.active]="selectedCategoryId === 'all'">
+               All Categories
+            </a>
+          </li>
+          
+          @for (cat of categories; track cat._id) {
+            <li>
+              <a href="javascript:void(0)" 
+                 (click)="onCategoryChange(cat._id)"
+                 [class.active]="selectedCategoryId === cat._id">
+                 {{ cat.name }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div class="filter-group">
+        <label>Price Range</label>
+        <div class="price-range">
+          <div class="price-inputs">
+            <input type="number" [(ngModel)]="priceRange[0]" (change)="applyFilters()" placeholder="Min">
+            <span>-</span>
+            <input type="number" [(ngModel)]="priceRange[1]" (change)="applyFilters()" placeholder="Max">
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <section class="products-section">
+      
+      <div class="section-header">
+        <h2>Automotive Parts</h2>
+        <span class="text-muted">{{ filteredProducts.length }} products found</span>
+      </div>
+
+      @if (products.length === 0 && filteredProducts.length === 0) {
+        <div class="text-center py-5">Loading products...</div>
+      }
+
+      @if (filteredProducts.length > 0) {
+        <div class="products-grid">
+          
+          @for (product of filteredProducts; track product._id) {
+            <div class="product-card">
+              
+              <div class="product-image">
+                <img [src]="product.imageCover" [alt]="product.name">
+                
+                @if (product.stock > 0) {
+                  <span class="stock-badge in-stock">In Stock</span>
+                } @else {
+                  <span class="stock-badge out-stock">Out of Stock</span>
+                }
+              </div>
+
+              <div class="product-info">
+                
+                <div class="info-top">
+                  <h3 [title]="product.name">{{ product.name }}</h3>
+                  
+                  <div class="rating">
+                    <span class="star-icon">★</span>
+                    <span>{{ product.ratingsAverage }}</span>
+                    <span class="review-count">({{ product.ratingsQuantity }})</span>
+                  </div>
+                </div>
+
+                <p class="company-name">{{ product.brand?.name || product.category.name }}</p>
+
+                <div class="card-footer-custom">
+                  
+                  <div class="price-block">
+                    @if (product.priceAfterDiscount) {
+                      <span class="current-price">{{ product.priceAfterDiscount | currency:'USD' }}</span>
+                      <span class="old-price">{{ product.price | currency:'USD' }}</span>
+                    } @else {
+                      <span class="current-price">{{ product.price | currency:'USD' }}</span>
+                    }
+                  </div>
+
+                  <button 
+                    class="add-btn" 
+                    [disabled]="product.stock === 0"
+                    (click)="addToCart(product._id)">
+                    <i class="bi bi-cart-plus"></i> Add
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          }
+
+        </div>
+      } @else if (products.length > 0) {
+        <div class="empty-state">
+           <h3>No products match your filters</h3>
+           <button (click)="searchTerm=''; selectedCategoryId='all'; applyFilters()">Clear Filters</button>
+        </div>
+      }
+
+    </section>
+  </div>
+</div>

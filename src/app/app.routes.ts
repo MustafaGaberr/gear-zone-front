@@ -9,6 +9,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { loggedGuard } from './core/guards/logged.guard';
 // import { authGuard } from './core/guard/';
 // import { loggedGuardGuard } from './core/guard/logged.guard';
+
 // 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,8 +24,12 @@ export const routes: Routes = [
     path: '', component: BlanckLayout, canActivate: [authGuard], children: [
       { path: 'home', loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) },
       {
-        path: 'product-details',
+        path: 'product-details/:id',
         loadComponent: () => import('./pages/product-details/product-details.component').then(m => m.ProductDetailsComponent)
+      },
+      {
+        path: 'products',
+        loadComponent: () => import('./pages/products/products.component').then(m => m.ProductsComponent)
       },
       {
         path: 'cart', loadComponent: () => import('./pages/home/components/cart/cart').then(m => m.Cart)

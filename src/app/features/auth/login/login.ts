@@ -50,7 +50,7 @@ export class Login implements OnInit {
 
       this.authService.getLoginApi(this.loginForm.value).subscribe({
         next: (res) => {
-          
+          console.log("dataaaaaaaaaaa" ,res)
           if (res.status === 'success' || res.token) {
             this.toastrService.success('Welcome back!', 'Login Successful');
             this.router.navigate(['/home']);
