@@ -24,8 +24,11 @@ export class AuthService {
     return this.httpClient.post('http://localhost:3000/api/users/login', data);
   }
   logout():void{
-     this.cookieService.delete('token' , '/')
-     this.router.navigate(['/login'])
+     this.cookieService.delete('token', '/');
+      this.cookieService.delete('token'); 
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 50);
 
   }
 
@@ -34,5 +37,10 @@ export class AuthService {
 
   }
 
+  personalInformation(data:object):Observable<any>{
+    return this.httpClient.put(`http://localhost:3000/api/users/updataprofile`,data)
+  }
+
 
 }
+this

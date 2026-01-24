@@ -5,12 +5,13 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { errorsInterceptor } from './core/interceptors/errors-interceptor';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { headersInterceptor } from './core/interceptors/header';
 
 export const appConfig: ApplicationConfig = {
   providers: [
   provideBrowserGlobalErrorListeners(),
   provideRouter(routes),
-  provideHttpClient(withFetch(), withInterceptors([errorsInterceptor])),
+  provideHttpClient(withFetch(), withInterceptors([errorsInterceptor,headersInterceptor],)),
   provideToastr(),
   provideAnimations()   
 ]

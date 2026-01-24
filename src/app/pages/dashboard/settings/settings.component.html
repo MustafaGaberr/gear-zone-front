@@ -23,14 +23,14 @@
 <div class="card border-0 shadow-sm rounded-5 mb-4">
   <div class="card-body p-4">
     <h5 class="fw-bold mb-4">Personal Information</h5>
-    <form (ngSubmit)="savePersonalInfo()">
+    <form [formGroup]="updatform" (ngSubmit)="savePersonalInfo()">
       <div class="row g-3">
         <div class="col-md-6">
           <label class="form-label text-muted small">First Name</label>
           <input
             type="text"
             class="form-control rounded-4"
-            [(ngModel)]="user().firstName"
+            formControlName="firstName"
             name="firstName"
           >
         </div>
@@ -39,7 +39,7 @@
           <input
             type="text"
             class="form-control rounded-4"
-            [(ngModel)]="user().lastName"
+            formControlName="lastName"
             name="lastName"
           >
         </div>
@@ -48,7 +48,7 @@
           <input
             type="email"
             class="form-control rounded-4"
-            [(ngModel)]="user().email"
+            formControlName="email"
             name="email"
           >
         </div>
@@ -64,23 +64,27 @@
 <div class="card border-0 shadow-sm rounded-5 mb-4">
   <div class="card-body p-4">
     <h5 class="fw-bold mb-4">Change Password</h5>
-    <form (ngSubmit)="updatePassword()">
+    <form [formGroup]="changPassword" (ngSubmit)="updatePassword()">
       <div class="row g-3">
         <div class="col-12">
           <label class="form-label text-muted small">Current Password</label>
           <input
             type="password"
             class="form-control rounded-4"
-            [(ngModel)]="passwords.current"
+            formControlName="currentPassword"
             name="currentPassword"
+             [type]="showPassword ? 'text' : 'password'"
           >
+          <button type="button" class="eye-btn" (click)="togglePasswordVisibility()">
+              <mat-icon class="eye-icon">{{ showPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </button>
         </div>
         <div class="col-12">
           <label class="form-label text-muted small">New Password</label>
           <input
             type="password"
             class="form-control rounded-4"
-            [(ngModel)]="passwords.new"
+            formControlName="newPassword"
             name="newPassword"
           >
         </div>
@@ -89,7 +93,7 @@
           <input
             type="password"
             class="form-control rounded-4"
-            [(ngModel)]="passwords.confirm"
+            formControlName="confirmPassword"
             name="confirmPassword"
           >
         </div>

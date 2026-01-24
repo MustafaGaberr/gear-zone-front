@@ -18,7 +18,7 @@ export class ProfileComponent {
     joinDate: new Date('2024-01-01'),
     location: 'New York, NY'
   });
-    
+
   stats = {
     totalOrders: 24,
     reviewsGiven: 18,
