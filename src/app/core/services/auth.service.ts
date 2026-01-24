@@ -1,5 +1,5 @@
 
-import { inject, Injectable , signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
@@ -11,23 +11,23 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
 
   private readonly httpClient = inject(HttpClient);
-  
 
-  private readonly cookieService=inject(CookieService)
-  private readonly router=inject(Router)
-userData: WritableSignal<any> = signal(null);
-constructor() {
+
+  private readonly cookieService = inject(CookieService)
+  private readonly router = inject(Router)
+  userData: WritableSignal<any> = signal(null);
+  constructor() {
     if (this.cookieService.check('user_data')) {
       try {
         const storedUser = JSON.parse(this.cookieService.get('user_data'));
-        this.userData.set(storedUser); 
+        this.userData.set(storedUser);
       } catch (err) {
-        this.logout(); 
+        this.logout();
       }
     }
   }
   getRegisterApi(data: Object): Observable<any> {
-    return this.httpClient.post('http://localhost:3000/api/users/register', data).pipe(
+    return this.httpClient.post('https://gear-zone-backend.fly.dev/api/users/register', data).pipe(
       tap((res: any) => {
         const user = res.data?.user;
         if (user) {
@@ -63,12 +63,12 @@ constructor() {
   }
 
   getLoginApi(data: Object): Observable<any> {
-    return this.httpClient.post('http://localhost:3000/api/users/login', data).pipe(
+    return this.httpClient.post('https://gear-zone-backend.fly.dev/api/users/login', data).pipe(
       tap((res: any) => {
         const token = res.data?.token || res.token;
         if (token) {
           this.cookieService.set('token', token, { path: '/' });
-          
+
           if (!res.user && !res.data?.user) {
             const decoded = this.decodeJWT(token);
             if (decoded) {
@@ -95,42 +95,43 @@ constructor() {
               this.cookieService.set('user_data', JSON.stringify(userData), { path: '/' });
               this.userData.set(userData);
             }
-       
-        }  }
+
+          }
+        }
       }
-    ));
+      ));
   }
-  logout():void{
-     this.cookieService.delete('token', '/');
-      this.cookieService.delete('token'); 
-      this.cookieService.delete('user_data', '/');
-      this.cookieService.delete('user_data');
-      this.userData.set(null); 
-      setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 50);
+  logout(): void {
+    this.cookieService.delete('token', '/');
+    this.cookieService.delete('token');
+    this.cookieService.delete('user_data', '/');
+    this.cookieService.delete('user_data');
+    this.userData.set(null);
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 50);
 
   }
 
-  profileApi():Observable<any>{
-    return this.httpClient.get('http://localhost:3000/api/users/')
+  profileApi(): Observable<any> {
+    return this.httpClient.get('https://gear-zone-backend.fly.dev/api/users/')
   }
 
-  personalInformation(data:object):Observable<any>{
-    return this.httpClient.put(`http://localhost:3000/api/users/updataprofile`,data).pipe(
-        tap((res: any) => {
-            if(res.user) {
-                const userData = {
-                    id: res.user.id || res.user._id,
-                    email: res.user.email,
-                    name: res.user.firstName && res.user.lastName ? `${res.user.firstName} ${res.user.lastName}` : res.user.userName || res.user.email?.split('@')[0] || res.user.email,
-                    type: res.user.role || res.user.type || 'user',
-                    avatar: res.user.avatar || null
-                };
-                this.cookieService.set('user_data', JSON.stringify(userData), { path: '/' });
-                this.userData.set(userData);
-            }
-        })
+  personalInformation(data: object): Observable<any> {
+    return this.httpClient.put(`https://gear-zone-backend.fly.dev/api/users/updataprofile`, data).pipe(
+      tap((res: any) => {
+        if (res.user) {
+          const userData = {
+            id: res.user.id || res.user._id,
+            email: res.user.email,
+            name: res.user.firstName && res.user.lastName ? `${res.user.firstName} ${res.user.lastName}` : res.user.userName || res.user.email?.split('@')[0] || res.user.email,
+            type: res.user.role || res.user.type || 'user',
+            avatar: res.user.avatar || null
+          };
+          this.cookieService.set('user_data', JSON.stringify(userData), { path: '/' });
+          this.userData.set(userData);
+        }
+      })
     );
   }
 

@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 export class ProductsService {
 
   private readonly _HttpClient = inject(HttpClient);
-  
-  private readonly baseUrl = 'http://localhost:3000/api/products'; 
+
+  private readonly baseUrl = 'https://gear-zone-backend.fly.dev/api/products';
 
   getAllProducts(): Observable<any> {
     return this._HttpClient.get(this.baseUrl);
-    
+
   }
 }

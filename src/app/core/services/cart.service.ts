@@ -8,8 +8,8 @@ import { Observable, tap } from 'rxjs';
 export class CartService {
 
   private readonly _HttpClient = inject(HttpClient);
-  
-  private readonly baseUrl: string = 'http://localhost:3000/api/cart'; 
+
+  private readonly baseUrl: string = 'https://gear-zone-backend.fly.dev/api/cart';
 
   cartNumber: WritableSignal<number> = signal(0);
 
@@ -41,7 +41,7 @@ export class CartService {
     return this._HttpClient.delete(`${this.baseUrl}/${itemId}`).pipe(
       tap((res: any) => {
         if (res.numOfCartItems !== undefined) {
-           this.cartNumber.set(res.numOfCartItems);
+          this.cartNumber.set(res.numOfCartItems);
         }
       })
     );
@@ -51,7 +51,7 @@ export class CartService {
     return this._HttpClient.put(`${this.baseUrl}/${itemId}`, { quantity: count }).pipe(
       tap((res: any) => {
         if (res.numOfCartItems !== undefined) {
-           this.cartNumber.set(res.numOfCartItems);
+          this.cartNumber.set(res.numOfCartItems);
         }
       })
     );
@@ -59,9 +59,9 @@ export class CartService {
 
   clearCart(): Observable<any> {
     return this._HttpClient.delete(this.baseUrl).pipe(
-       tap(() => {
-          this.cartNumber.set(0); 
-       })
+      tap(() => {
+        this.cartNumber.set(0);
+      })
     );
   }
 }
