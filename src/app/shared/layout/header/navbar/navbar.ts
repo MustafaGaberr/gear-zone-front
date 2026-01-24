@@ -18,7 +18,7 @@ interface User {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink ,RouterLinkActive],
+  imports: [CommonModule, RouterLink ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
