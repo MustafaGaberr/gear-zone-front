@@ -61,7 +61,11 @@ export class Login implements OnInit {
         error: (err) => {
           this.loginForm.enable();
           console.error(err);
-          this.toastrService.error(err.error.message || 'Invalid email or password');
+          if (err.status === 0) {
+            this.toastrService.error('Cannot connect to server. Please make sure the backend server is running.', 'Connection Error');
+          } else {
+            this.toastrService.error(err.error?.message || 'Invalid email or password', 'Login Failed');
+          }
         }
       });
     } else {
