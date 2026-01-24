@@ -33,11 +33,11 @@ constructor() {
   getLoginApi(data: Object): Observable<any> {
     return this.httpClient.post('http://localhost:3000/api/users/login', data).pipe(
       tap((res: any) => {
-        if (res.token) {
-          this.cookieService.set('token', res.token, { path: '/' });
+        if (res.data.token) {
+          this.cookieService.set('token', res.data.token, { path: '/' });
 
           if (res.user) {
-            this.cookieService.set('user_data', JSON.stringify(res.user), { path: '/' });
+            this.cookieService.set('user_data', JSON.stringify(res.data.user), { path: '/' });
             this.userData.set(res.user); 
           }
         }
