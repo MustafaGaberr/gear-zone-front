@@ -73,11 +73,7 @@
             class="form-control rounded-4"
             formControlName="currentPassword"
             name="currentPassword"
-             [type]="showPassword ? 'text' : 'password'"
           >
-          <button type="button" class="eye-btn" (click)="togglePasswordVisibility()">
-              <mat-icon class="eye-icon">{{ showPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-          </button>
         </div>
         <div class="col-12">
           <label class="form-label text-muted small">New Password</label>
