@@ -1,5 +1,5 @@
-<div class="contact-page">
-  <div class="container py-5">
+<div class="contact-page pt-5">
+  <div class="container py-5 ">
     <!-- Hero Section -->
     <div class="text-center mb-5">
       <h1 class="display-4 fw-bold text-gradient">{{ translationService.translate('contact.title') }}</h1>
@@ -17,7 +17,8 @@
             </div>
             <h5>{{ translationService.translate('contact.email') }}</h5>
             <p>support&#64;gearzone.com</p>
-            <a href="mailto:support@gearzone.com" class="contact-link">{{ translationService.translate('contact.sendEmail') }}</a>
+            <a href="mailto:support@gearzone.com" class="contact-link">{{
+              translationService.translate('contact.sendEmail') }}</a>
           </div>
 
           <!-- Phone Card -->
@@ -37,7 +38,8 @@
             </div>
             <h5>{{ translationService.translate('contact.location') }}</h5>
             <p>Cairo, Egypt</p>
-            <a href="https://maps.google.com" target="_blank" class="contact-link">{{ translationService.translate('contact.viewMap') }}</a>
+            <a href="https://maps.google.com" target="_blank" class="contact-link">{{
+              translationService.translate('contact.viewMap') }}</a>
           </div>
         </div>
       </div>
@@ -46,19 +48,19 @@
       <div class="col-lg-8">
         <div class="contact-form-wrapper glass-card">
           <h3 class="mb-4">{{ translationService.translate('contact.formTitle') }}</h3>
-          
+
           @if (submitSuccess) {
-            <div class="alert alert-success d-flex align-items-center" role="alert">
-              <i class="bi bi-check-circle-fill me-2"></i>
-              {{ translationService.translate('contact.successMessage') }}
-            </div>
+          <div class="alert alert-success d-flex align-items-center" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            {{ translationService.translate('contact.successMessage') }}
+          </div>
           }
 
           @if (submitError) {
-            <div class="alert alert-danger d-flex align-items-center" role="alert">
-              <i class="bi bi-exclamation-triangle-fill me-2"></i>
-              {{ translationService.translate('contact.errorMessage') }}
-            </div>
+          <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            {{ translationService.translate('contact.errorMessage') }}
+          </div>
           }
 
           <form #contactFormRef="ngForm" (ngSubmit)="onSubmit(contactFormRef)">
@@ -66,22 +68,13 @@
               <!-- Name -->
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    id="name" 
-                    name="name"
-                    [(ngModel)]="contactForm.name"
-                    required
-                    minlength="2"
-                    #nameInput="ngModel"
-                    [placeholder]="translationService.translate('contact.name')"
-                  />
+                  <input type="text" class="form-control" id="name" name="name" [(ngModel)]="contactForm.name" required
+                    minlength="2" #nameInput="ngModel" [placeholder]="translationService.translate('contact.name')" />
                   <label for="name">{{ translationService.translate('contact.name') }}</label>
                   @if (nameInput.invalid && nameInput.touched) {
-                    <div class="invalid-feedback d-block">
-                      {{ translationService.translate('contact.nameRequired') }}
-                    </div>
+                  <div class="invalid-feedback d-block">
+                    {{ translationService.translate('contact.nameRequired') }}
+                  </div>
                   }
                 </div>
               </div>
@@ -89,22 +82,14 @@
               <!-- Email -->
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input 
-                    type="email" 
-                    class="form-control" 
-                    id="email" 
-                    name="email"
-                    [(ngModel)]="contactForm.email"
-                    required
-                    email
-                    #emailInput="ngModel"
-                    [placeholder]="translationService.translate('contact.emailAddress')"
-                  />
+                  <input type="email" class="form-control" id="email" name="email" [(ngModel)]="contactForm.email"
+                    required email #emailInput="ngModel"
+                    [placeholder]="translationService.translate('contact.emailAddress')" />
                   <label for="email">{{ translationService.translate('contact.emailAddress') }}</label>
                   @if (emailInput.invalid && emailInput.touched) {
-                    <div class="invalid-feedback d-block">
-                      {{ translationService.translate('contact.emailRequired') }}
-                    </div>
+                  <div class="invalid-feedback d-block">
+                    {{ translationService.translate('contact.emailRequired') }}
+                  </div>
                   }
                 </div>
               </div>
@@ -112,14 +97,8 @@
               <!-- Phone -->
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input 
-                    type="tel" 
-                    class="form-control" 
-                    id="phone" 
-                    name="phone"
-                    [(ngModel)]="contactForm.phone"
-                    [placeholder]="translationService.translate('contact.phoneNumber')"
-                  />
+                  <input type="tel" class="form-control" id="phone" name="phone" [(ngModel)]="contactForm.phone"
+                    [placeholder]="translationService.translate('contact.phoneNumber')" />
                   <label for="phone">{{ translationService.translate('contact.phoneNumber') }}</label>
                 </div>
               </div>
@@ -127,14 +106,8 @@
               <!-- Subject -->
               <div class="col-md-6">
                 <div class="form-floating">
-                  <select 
-                    class="form-select" 
-                    id="subject" 
-                    name="subject"
-                    [(ngModel)]="contactForm.subject"
-                    required
-                    #subjectInput="ngModel"
-                  >
+                  <select class="form-select" id="subject" name="subject" [(ngModel)]="contactForm.subject" required
+                    #subjectInput="ngModel">
                     <option value="">{{ translationService.translate('contact.selectSubject') }}</option>
                     <option value="general">{{ translationService.translate('contact.subjects.general') }}</option>
                     <option value="support">{{ translationService.translate('contact.subjects.support') }}</option>
@@ -148,39 +121,28 @@
               <!-- Message -->
               <div class="col-12">
                 <div class="form-floating">
-                  <textarea 
-                    class="form-control" 
-                    id="message" 
-                    name="message"
-                    [(ngModel)]="contactForm.message"
-                    required
-                    minlength="10"
-                    #messageInput="ngModel"
-                    style="height: 150px"
-                    [placeholder]="translationService.translate('contact.message')"
-                  ></textarea>
+                  <textarea class="form-control" id="message" name="message" [(ngModel)]="contactForm.message" required
+                    minlength="10" #messageInput="ngModel" style="height: 150px"
+                    [placeholder]="translationService.translate('contact.message')"></textarea>
                   <label for="message">{{ translationService.translate('contact.message') }}</label>
                   @if (messageInput.invalid && messageInput.touched) {
-                    <div class="invalid-feedback d-block">
-                      {{ translationService.translate('contact.messageRequired') }}
-                    </div>
+                  <div class="invalid-feedback d-block">
+                    {{ translationService.translate('contact.messageRequired') }}
+                  </div>
                   }
                 </div>
               </div>
 
               <!-- Submit Button -->
               <div class="col-12">
-                <button 
-                  type="submit" 
-                  class="btn btn-primary btn-lg w-100"
-                  [disabled]="contactFormRef.invalid || isSubmitting"
-                >
+                <button type="submit" class="btn btn-primary btn-lg w-100"
+                  [disabled]="contactFormRef.invalid || isSubmitting">
                   @if (isSubmitting) {
-                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
-                    {{ translationService.translate('contact.sending') }}
+                  <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                  {{ translationService.translate('contact.sending') }}
                   } @else {
-                    <i class="bi bi-send me-2"></i>
-                    {{ translationService.translate('contact.send') }}
+                  <i class="bi bi-send me-2"></i>
+                  {{ translationService.translate('contact.send') }}
                   }
                 </button>
               </div>

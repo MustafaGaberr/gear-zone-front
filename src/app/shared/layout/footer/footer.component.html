@@ -59,7 +59,7 @@
       <!-- Follow Us -->
       <div class="col-12 col-sm-6 col-lg-3">
         <h5 class="text-white fw-semibold mb-3">{{ translationService.translate('footer.followUs') }}</h5>
-        <div class="d-flex gap-3">
+        <div class="d-flex gap-3 mb-4">
           <a href="https://facebook.com" target="_blank" class="social-link">
             <i class="bi bi-facebook"></i>
           </a>
@@ -72,6 +72,19 @@
           <a href="https://linkedin.com" target="_blank" class="social-link">
             <i class="bi bi-linkedin"></i>
           </a>
+        </div>
+
+        <!-- Language Toggle -->
+        <div class="lang-toggle-footer">
+          <span class="lang-label text-secondary">{{ translationService.currentLang() === 'ar' ? 'اللغة' : 'Language'
+            }}</span>
+          <div class="lang-toggle-switch" (click)="switchLanguage()">
+            <span class="lang-option" [class.active]="translationService.currentLang() === 'en'">EN</span>
+            <div class="toggle-track" [class.ar-active]="translationService.currentLang() === 'ar'">
+              <div class="toggle-thumb"></div>
+            </div>
+            <span class="lang-option" [class.active]="translationService.currentLang() === 'ar'">ع</span>
+          </div>
         </div>
       </div>
     </div>

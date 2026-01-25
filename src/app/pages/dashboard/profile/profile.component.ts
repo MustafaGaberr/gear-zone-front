@@ -15,8 +15,8 @@ export class ProfileComponent {
     email: 'Gabour@GearZone.com',
     phone: '+20 123 456 7890',
     role: 'Premium Member',
-    joinDate: new Date('2024-01-01'),
-    location: 'New York, NY'
+    joinDate: new Date('2025-01-01'),
+    location: 'Aswan, Egypt'
   });
 
   stats = {
@@ -26,8 +26,8 @@ export class ProfileComponent {
   };
 
   recentOrders = [
-    { id: '#12345', status: 'Delivered', name: 'Premium Brake Disc Set', date: 'Dec 5, 2024', price: '$149.99', statusClass: 'status-delivered' },
-    { id: '#12344', status: 'In Transit', name: 'High Performance Oil Filter', date: 'Nov 28, 2024', price: '$24.99', statusClass: 'status-transit' },
-    { id: '#12343', status: 'Delivered', name: 'Car Battery 12V 75Ah', date: 'Nov 15, 2024', price: '$129.99', statusClass: 'status-delivered' }
+    { id: '#12345', status: 'Delivered', name: 'Premium Brake Disc Set', date: 'Dec 5, 2025', price: '$149.99', statusClass: 'status-delivered' },
+    { id: '#12344', status: 'In Transit', name: 'High Performance Oil Filter', date: 'Nov 28, 2025', price: '$24.99', statusClass: 'status-transit' },
+    { id: '#12343', status: 'Delivered', name: 'Car Battery 12V 75Ah', date: 'Nov 15, 2025', price: '$129.99', statusClass: 'status-delivered' }
   ];
 }

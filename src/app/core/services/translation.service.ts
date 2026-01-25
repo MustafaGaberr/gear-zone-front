@@ -201,7 +201,7 @@ export class TranslationService {
                 subscribeText: 'Subscribe to get updates on new products and offers.',
                 subscribe: 'Subscribe',
                 emailPlaceholder: 'Enter your email',
-                copyright: '© 2024 GearZone. All rights reserved.'
+                copyright: '© 2026 GearZone. All rights reserved.'
             }
         },
         ar: {
@@ -388,7 +388,7 @@ export class TranslationService {
                 subscribeText: 'اشترك للحصول على تحديثات حول المنتجات الجديدة والعروض.',
                 subscribe: 'اشترك',
                 emailPlaceholder: 'أدخل بريدك الإلكتروني',
-                copyright: '© 2024 جير زون. جميع الحقوق محفوظة.'
+                copyright: '© 2026 جير زون. جميع الحقوق محفوظة.'
             }
         }
     };

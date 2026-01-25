@@ -16,4 +16,8 @@ export class FooterComponent {
   translationService = inject(TranslationService);
   logoImage = GZLogo;
   currentYear = new Date().getFullYear();
+
+  switchLanguage(): void {
+    this.translationService.switchLanguage();
+  }
 }

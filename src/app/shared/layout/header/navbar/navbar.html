@@ -107,15 +107,6 @@
 
         } @else {
 
-        <!-- Language Toggle for non-logged in users -->
-        <div class="lang-toggle-btn-wrapper" (click)="switchLanguage()">
-          <span class="lang-option-sm" [class.active]="translationService.currentLang() === 'en'">EN</span>
-          <div class="toggle-track-sm" [class.ar-active]="translationService.currentLang() === 'ar'">
-            <div class="toggle-thumb-sm"></div>
-          </div>
-          <span class="lang-option-sm" [class.active]="translationService.currentLang() === 'ar'">ع</span>
-        </div>
-
         <a routerLink="/login" class="nav-link nav-link-custom d-none d-md-block" (click)="closeMobileMenu()">
           {{ translationService.translate('nav.login') }}
         </a>
