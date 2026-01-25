@@ -71,7 +71,8 @@
                     </div>
                 </div>
                 <div class="d-flex flex-column">
-                    <p class="forget">{{ translationService.translate('auth.forgotPassword') }}</p>
+                    <a routerLink="/forgot-password" class="forget">{{
+                        translationService.translate('auth.forgotPassword') }}</a>
                     <button class="login-btn" type="submit">{{ translationService.translate('auth.login') }}</button>
                 </div>
 
