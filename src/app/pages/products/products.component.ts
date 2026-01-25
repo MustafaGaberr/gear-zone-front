@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -19,7 +19,8 @@ export class ProductsComponent implements OnInit {
   // Injections
   private readonly _ProductsService = inject(ProductsService);
   private readonly _CartService = inject(CartService);
-  public translationService = inject(TranslationService);
+  public translationService = inject(TranslationService)
+  private readonly changeDetectorRef=inject(ChangeDetectorRef)
 
   // Data Variables
   products: Product[] = [];
@@ -28,12 +29,23 @@ export class ProductsComponent implements OnInit {
 
   // Filter Variables
   searchTerm: string = '';
+  carModel: string = '';
+  location: string = '';
   selectedCategoryId: string = 'all';
   priceRange: number[] = [0, 50000];
 
   ngOnInit(): void {
     this.getAllProducts();
-    this.getAllCategories();
+    // this.getAllCategories(); // Commented out until service is ready or just mocked
+    // this.categories = [
+    //     { _id: '1', name: 'All Categories', slug: 'all', image: '' },
+    //     { _id: '2', name: 'Engine Parts', slug: 'engine', image: '' },
+    //     { _id: '3', name: 'Brake Systems', slug: 'brakes', image: '' },
+    //     { _id: '4', name: 'Electrical', slug: 'electrical', image: '' },
+    //     { _id: '5', name: 'Suspensions', slug: 'suspensions', image: '' },
+    //     { _id: '6', name: 'Exhaust', slug: 'exhaust', image: '' },
+    //     { _id: '7', name: 'Transmission', slug: 'transmission', image: '' }
+    // ];
   }
 
   getAllProducts() {
@@ -41,9 +53,9 @@ export class ProductsComponent implements OnInit {
       next: (res) => {
         this.products = res.data;
         console.log("products", res.data)
-        this.filteredProducts = res.data;
-      },
-      error: (err) => console.error(err)
+        this.changeDetectorRef.detectChanges()
+        // this.filteredProducts = res.data;
+      }
     });
   }
 

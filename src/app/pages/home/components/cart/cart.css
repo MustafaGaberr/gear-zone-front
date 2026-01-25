@@ -1,5 +1,7 @@
 .bg{
     background-color: #F9FAFB;
+    padding-top: 6.5rem;
+    padding-bottom: 2rem;
 }
 .card-custom{
   max-height: 130px;

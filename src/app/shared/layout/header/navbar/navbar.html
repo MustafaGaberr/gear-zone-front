@@ -27,6 +27,11 @@
 
       <div class="d-flex align-items-center gap-3">
 
+        <!-- Language Switcher (Visible to all) -->
+        <!-- <button class="btn btn-link text-white text-decoration-none fw-bold p-0" (click)="switchLanguage()">
+          {{ translationService.currentLang() === 'en' ? 'عربي' : 'English' }}
+        </button> -->
+
         @if (authService.userData(); as user) {
 
         <button (click)="toggleNotification()" class="btn btn-link text-white p-0 position-relative">

@@ -107,9 +107,25 @@ export class TranslationService {
                 priceRange: 'Price Range',
                 addToCart: 'Add to Cart',
                 outOfStock: 'Out of Stock',
-                noProducts: 'No products found',
+                inStock: 'In Stock',
+                noProducts: 'No products found matching your criteria',
                 filters: 'Filters',
-                clearFilters: 'Clear Filters'
+                clearFilters: 'Clear Filters',
+                carModel: 'Car Model',
+                category: 'Category',
+                location: 'Location',
+                applyFilters: 'Apply Filters',
+                showing: 'Showing',
+                productsFound: 'products found',
+                sortBy: 'Sort By',
+                sort: {
+                    relevant: 'Relevant',
+                    priceLowHigh: 'Price: Low to High',
+                    priceHighLow: 'Price: High to Low'
+                },
+                enterCityState: 'Enter city or state',
+                searchModel: 'Search model...',
+                genericBrand: 'Generic Brand'
             },
             // Cart
             cart: {

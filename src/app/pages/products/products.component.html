@@ -1,126 +1,146 @@
-<div class="products-container">
-  <div class="main-content">
+<div class="products-container container-fluid marg">
+  <div class="row">
 
-    <aside class="filters-sidebar">
-      <div class="filter-header">
-        <h3>{{ translationService.translate('products.filters') }}</h3>
-      </div>
+    <!-- Sidebar Filters -->
+    <div class="col-lg-3 col-md-4 mb-4">
+      <div class="filters-sidebar">
 
-      <div class="filter-group">
-        <label>{{ translationService.translate('common.search') }}</label>
-        <div class="input-wrapper">
-          <input type="text" [placeholder]="translationService.translate('products.search')" [(ngModel)]="searchTerm"
-            (input)="applyFilters()" />
+        <div class="filter-header d-flex justify-content-between align-items-center mb-4">
+          <h5 class="fw-bold mb-0">{{ translationService.translate('products.filters') }}</h5>
+          <i class="bi bi-funnel"></i>
         </div>
+
+        <!-- Car Model Filter -->
+        <div class="filter-group mb-4">
+          <label class="form-label text-muted small">{{ translationService.translate('products.carModel') }}</label>
+          <div class="input-group">
+            <input type="text" class="form-control" [placeholder]="translationService.translate('products.searchModel')"
+              [(ngModel)]="carModel">
+          </div>
+        </div>
+
+        <!-- Categories Filter -->
+        <div class="filter-group mb-4">
+          <label class="form-label text-muted small">{{ translationService.translate('products.category') }}</label>
+          <ul class="list-unstyled category-list">
+            <li [class.active]="selectedCategoryId === 'all'">
+              <a (click)="onCategoryChange('all')">{{ translationService.translate('products.allCategories') }}</a>
+            </li>
+            @for (cat of categories; track cat._id) {
+            <li [class.active]="selectedCategoryId === cat._id">
+              <a (click)="onCategoryChange(cat._id)">{{ cat.name }}</a>
+            </li>
+            }
+          </ul>
+        </div>
+
+        <!-- Price Range Filter -->
+        <div class="filter-group mb-4">
+          <label class="form-label text-muted small">{{ translationService.translate('products.priceRange') }}</label>
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="text-muted small">$0</span>
+            <span class="text-muted small">$1000</span>
+          </div>
+          <input type="range" class="form-range" min="0" max="1000" [(ngModel)]="priceRange[1]"
+            (change)="applyFilters()">
+        </div>
+
+        <!-- Location Filter -->
+        <div class="filter-group mb-4">
+          <label class="form-label text-muted small">{{ translationService.translate('products.location') }}</label>
+          <input type="text" class="form-control"
+            [placeholder]="translationService.translate('products.enterCityState')" [(ngModel)]="location">
+        </div>
+
+        <button class="btn btn-primary w-100 rounded-pill" (click)="applyFilters()">{{
+          translationService.translate('products.applyFilters') }}</button>
       </div>
+    </div>
 
-      <div class="filter-group">
-        <label>{{ translationService.translate('products.allCategories') }}</label>
-        <ul class="category-list">
-          <li>
-            <a href="javascript:void(0)" (click)="onCategoryChange('all')"
-              [class.active]="selectedCategoryId === 'all'">
-              {{ translationService.translate('products.allCategories') }}
-            </a>
-          </li>
+    <!-- Main Content -->
+    <div class="col-lg-9 col-md-8">
 
-          @for (cat of categories; track cat._id) {
-          <li>
-            <a href="javascript:void(0)" (click)="onCategoryChange(cat._id)"
-              [class.active]="selectedCategoryId === cat._id">
-              {{ cat.name }}
-            </a>
-          </li>
-          }
-        </ul>
-      </div>
-
-      <div class="filter-group">
-        <label>{{ translationService.translate('products.priceRange') }}</label>
-        <div class="price-range">
-          <div class="price-inputs">
-            <input type="number" [(ngModel)]="priceRange[0]" (change)="applyFilters()" placeholder="Min">
-            <span>-</span>
-            <input type="number" [(ngModel)]="priceRange[1]" (change)="applyFilters()" placeholder="Max">
+      <!-- Page Header -->
+      <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-3 rounded shadow-sm">
+        <div>
+          <h2 class="fw-bold mb-1">{{ translationService.translate('products.title') }}</h2>
+          <span class="text-muted small">{{ translationService.translate('products.showing') }} {{
+            filteredProducts.length }} {{ translationService.translate('products.productsFound') }}</span>
+        </div>
+        <div class="d-flex gap-2">
+          <select class="form-select w-auto border-0 bg-light"
+            [attr.aria-label]="translationService.translate('products.sortBy')">
+            <option selected>{{ translationService.translate('products.sort.relevant') }}</option>
+            <option value="1">{{ translationService.translate('products.sort.priceLowHigh') }}</option>
+            <option value="2">{{ translationService.translate('products.sort.priceHighLow') }}</option>
+          </select>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary"><i class="bi bi-grid-fill"></i></button>
+            <button type="button" class="btn btn-outline-light text-dark"><i class="bi bi-list"></i></button>
           </div>
         </div>
       </div>
 
-    </aside>
+      <!-- Products Grid -->
+      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+        @for (product of products; track product._id) {
+        <div class="col">
+          <div class="card h-100 product-card border-0 shadow-sm">
 
-    <section class="products-section">
-
-      <div class="section-header">
-        <h2>{{ translationService.translate('products.title') }}</h2>
-        <span class="text-muted">{{ filteredProducts.length }} {{ translationService.currentLang() === 'ar' ? 'منتج' :
-          'products found' }}</span>
-      </div>
-
-      @if (products.length === 0 && filteredProducts.length === 0) {
-      <div class="text-center py-5">{{ translationService.translate('common.loading') }}</div>
-      }
-
-      @if (filteredProducts.length > 0) {
-      <div class="products-grid">
-
-        @for (product of filteredProducts; track product._id) {
-        <div class="product-card">
-
-          <a [routerLink]="['/product-details', product._id]" class="product-image-link">
-            <div class="product-image">
-              <img [src]="product.imageCover" [alt]="product.name">
+            <div class="card-img-wrapper position-relative p-3 bg-light rounded-top">
+              <img src="/images/product-1.jpg" class="card-img-top" [alt]="product.name">
 
               @if (product.stock > 0) {
-              <span class="stock-badge in-stock">{{ translationService.currentLang() === 'ar' ? 'متوفر' : 'In Stock'
-                }}</span>
+              <span class="badge bg-success-subtle text-success position-absolute top-0 end-0 m-3">{{
+                translationService.translate('products.inStock') }}</span>
               } @else {
-              <span class="stock-badge out-stock">{{ translationService.translate('products.outOfStock') }}</span>
+              <span class="badge bg-danger-subtle text-danger position-absolute top-0 end-0 m-3">{{
+                translationService.translate('products.outOfStock') }}</span>
               }
             </div>
-          </a>
 
-          <div class="product-info">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-truncate" [title]="product.name">{{ product.name }}</h5>
 
-            <div class="info-top">
-              <h3 [title]="product.name">{{ product.name }}</h3>
-
-              <div class="rating">
-                <span class="star-icon">★</span>
-                <span>{{ product.ratingsAverage }}</span>
-                <span class="review-count">({{ product.ratingsQuantity }})</span>
-              </div>
-            </div>
-
-            <p class="company-name">{{ product.brand?.name || product.category.name }}</p>
-
-            <div class="card-footer-custom">
-
-              <div class="price-block">
-                @if (product.priceAfterDiscount) {
-                <span class="current-price">{{ product.priceAfterDiscount | currency:'USD' }}</span>
-                <span class="old-price">{{ product.price | currency:'USD' }}</span>
-                } @else {
-                <span class="current-price">{{ product.price | currency:'USD' }}</span>
-                }
+              <div class="rating mb-2 d-flex align-items-center small">
+                <i class="bi bi-star-fill text-warning me-1"></i>
+                <span class="fw-bold me-1">{{ product.ratingsAverage }}</span>
+                <span class="text-muted">({{ product.ratingsQuantity }})</span>
               </div>
 
-              <button class="add-btn" [disabled]="product.stock === 0" (click)="addToCart(product._id)">
-                <i class="bi bi-cart-plus"></i> {{ translationService.translate('products.addToCart') }}
-              </button>
+              <p class="card-text text-muted small mb-2">{{ product.brand?.name ||
+                translationService.translate('products.genericBrand') }}</p>
 
+              <div class="d-flex justify-content-between align-items-end mt-3">
+                <div class="price-wrapper">
+                  @if (product.priceAfterDiscount) {
+                  <span class="h5 fw-bold text-primary mb-0 d-block">{{ product.priceAfterDiscount | currency:'USD'
+                    }}</span>
+                  <span class="text-muted text-decoration-line-through small">{{ product.price | currency:'USD'
+                    }}</span>
+                  } @else {
+                  <span class="h5 fw-bold text-primary mb-0">{{ product.price | currency:'USD' }}</span>
+                  }
+                </div>
+
+                <button class="btn btn-outline-primary btn-sm rounded-circle" [disabled]="product.stock === 0"
+                  (click)="addToCart(product._id)">
+                  <i class="bi bi-cart-plus"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
         }
-
       </div>
-      } @else if (products.length > 0) {
-      <div class="empty-state">
-        <h3>{{ translationService.translate('products.noProducts') }}</h3>
-        <button (click)="clearFilters()">{{ translationService.translate('products.clearFilters') }}</button>
+
+      @if (filteredProducts.length === 0) {
+      <div class="text-center py-5">
+        <i class="bi bi-search display-1 text-muted"></i>
+        <p class="mt-3 text-muted">{{ translationService.translate('products.noProducts') }}</p>
       </div>
       }
 
-    </section>
+    </div>
   </div>
 </div>

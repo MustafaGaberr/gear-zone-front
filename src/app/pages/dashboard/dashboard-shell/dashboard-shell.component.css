@@ -1,2 +1,6 @@
 /* Dashboard Shell styles */
 
+.container-fluid{
+    padding-top: 6.5rem;
+    /* background-color: #F9FAFB; */
+}
