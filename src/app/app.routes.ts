@@ -1,8 +1,5 @@
 import { Routes } from '@angular/router';
-// import { HomeComponent } from './pages/home/home.component';
 import { DashboardShellComponent } from './pages/dashboard/dashboard-shell/dashboard-shell.component';
-import { Login } from './features/auth/login/login';
-import { Register } from './features/auth/register/register';
 import { AuthLayaout } from './shared/layout/auth-layaout/auth-layaout';
 import { BlanckLayout } from './shared/layout/blanck-layout/blanck-layout';
 import { authGuard } from './core/guards/auth.guard';
@@ -13,16 +10,34 @@ export const routes: Routes = [
 
   // Auth routes (login/register) - only accessible when NOT logged in
   {
-    path: '', component: AuthLayaout, canActivate: [loggedGuard], children: [
-      { path: 'login', component: Login },
-      { path: 'register', component: Register }
+    path: '',
+    component: AuthLayaout,
+    canActivate: [loggedGuard],
+    children: [
+      {
+        path: 'login',
+        loadComponent: () => import('./features/auth/login/login').then(m => m.Login)
+      },
+      {
+        path: 'register',
+        loadComponent: () => import('./features/auth/register/register').then(m => m.Register)
+      },
+      {
+        path: 'forgot-password',
+        loadComponent: () => import('./features/auth/forgotpassword/forgotpassword').then(m => m.Forgotpassword)
+      }
     ]
   },
 
   // Public routes - accessible to everyone (no authGuard)
   {
-    path: '', component: BlanckLayout, children: [
-      { path: 'home', loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) },
+    path: '',
+    component: BlanckLayout,
+    children: [
+      {
+        path: 'home',
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+      },
       {
         path: 'products',
         loadComponent: () => import('./pages/products/products.component').then(m => m.ProductsComponent)
@@ -72,9 +87,6 @@ export const routes: Routes = [
       },
     ]
   },
-  {
-    path: '',
-    loadChildren: () => import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
-  },
+
   { path: '**', redirectTo: '' }
 ];

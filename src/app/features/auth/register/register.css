@@ -23,9 +23,11 @@ a {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -36,8 +38,9 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 500px;
+    max-width: 700px;
     width: 100%;
+    margin-top: 5rem;
 }
 
 .register-container img {
@@ -49,12 +52,23 @@ a {
 .register-form {
     background-color: #ffffff;
     width: 100%;
-    max-width: 480px;
+    max-width: 680px;
     display: flex;
     flex-direction: column;
-    padding: 32px;
+    padding: 32px 40px;
     border-radius: 16px;
     align-items: center;
+}
+
+/* Form Row - 2 columns layout */
+.form-row {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+.form-row .input-field {
+    flex: 1;
 }
 
 .register-form .header {
@@ -373,13 +387,23 @@ a {
     text-decoration: underline;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 680px) {
+    .register-container {
+        max-width: 100%;
+    }
+
     .register-form {
         padding: 24px 16px;
+        max-width: 100%;
     }
-    
+
     .register-form .header h1 {
         font-size: 24px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
     }
 
     .name-row {
