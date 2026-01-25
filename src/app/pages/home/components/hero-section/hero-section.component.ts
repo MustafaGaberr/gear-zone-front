@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TranslationService } from '../../../../core/services/translation.service';
 
 @Component({
   selector: 'app-hero-section',
@@ -10,19 +12,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './hero-section.component.css'
 })
 export class HeroSectionComponent {
-  searchQuery = '';
+  translationService = inject(TranslationService);
+  private router = inject(Router);
 
-  stats = [
-    { icon: 'bi-box-seam', value: '50,000+', label: 'Products Listed' },
-    { icon: 'bi-shop', value: '2,500+', label: 'Active Sellers' },
-    { icon: 'bi-people', value: '15,000+', label: 'Happy Customers' }
-  ];
+  searchQuery = '';
 
   onSearch(): void {
     if (this.searchQuery.trim()) {
-      // Navigate to products page with search query
-      console.log('Searching for:', this.searchQuery);
+      this.router.navigate(['/products'], {
+        queryParams: { search: this.searchQuery.trim() }
+      });
     }
   }
 }
-

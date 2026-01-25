@@ -8,20 +8,27 @@
           <img [src]="logoImage" alt="GearZone" height="32" />
         </a>
         <p class="text-secondary">
-          Your trusted marketplace for quality car spare parts
+          {{ translationService.translate('footer.aboutText') }}
         </p>
       </div>
 
       <!-- Quick Links -->
       <div class="col-6 col-lg-3">
-        <h5 class="text-white fw-semibold mb-3">Quick Links</h5>
+        <h5 class="text-white fw-semibold mb-3">{{ translationService.translate('footer.quickLinks') }}</h5>
         <ul class="list-unstyled">
-          <li class="mb-2" *ngFor="let link of quickLinks">
-            <a
-              [routerLink]="link.routerLink"
-              class="text-secondary text-decoration-none footer-link"
-            >
-              {{ link.label }}
+          <li class="mb-2">
+            <a routerLink="/products" class="text-secondary text-decoration-none footer-link">
+              {{ translationService.translate('nav.products') }}
+            </a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/register" class="text-secondary text-decoration-none footer-link">
+              {{ translationService.translate('nav.register') }}
+            </a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/login" class="text-secondary text-decoration-none footer-link">
+              {{ translationService.translate('nav.login') }}
             </a>
           </li>
         </ul>
@@ -29,39 +36,50 @@
 
       <!-- Support -->
       <div class="col-6 col-lg-3">
-        <h5 class="text-white fw-semibold mb-3">Support</h5>
+        <h5 class="text-white fw-semibold mb-3">{{ translationService.translate('footer.customerService') }}</h5>
         <ul class="list-unstyled">
-          <li class="mb-2" *ngFor="let link of supportLinks">
-            <a
-              [routerLink]="link.routerLink"
-              class="text-secondary text-decoration-none footer-link"
-            >
-              {{ link.label }}
+          <li class="mb-2">
+            <a routerLink="/contact" class="text-secondary text-decoration-none footer-link">
+              {{ translationService.translate('footer.contactUs') }}
+            </a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/faq" class="text-secondary text-decoration-none footer-link">
+              {{ translationService.translate('footer.faq') }}
+            </a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/shipping" class="text-secondary text-decoration-none footer-link">
+              {{ translationService.translate('footer.shipping') }}
             </a>
           </li>
         </ul>
       </div>
 
-      <!-- Legal -->
+      <!-- Follow Us -->
       <div class="col-12 col-sm-6 col-lg-3">
-        <h5 class="text-white fw-semibold mb-3">Legal</h5>
-        <ul class="list-unstyled">
-          <li class="mb-2" *ngFor="let link of legalLinks">
-            <a
-              [routerLink]="link.routerLink"
-              class="text-secondary text-decoration-none footer-link"
-            >
-              {{ link.label }}
-            </a>
-          </li>
-        </ul>
+        <h5 class="text-white fw-semibold mb-3">{{ translationService.translate('footer.followUs') }}</h5>
+        <div class="d-flex gap-3">
+          <a href="https://facebook.com" target="_blank" class="social-link">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" class="social-link">
+            <i class="bi bi-twitter-x"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="social-link">
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="social-link">
+            <i class="bi bi-linkedin"></i>
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- Bottom Bar -->
     <div class="border-top border-secondary pt-4">
       <p class="text-secondary text-center mb-0">
-        © {{ currentYear }} GearZone. All rights reserved.
+        {{ translationService.translate('footer.copyright') }}
       </p>
     </div>
   </div>

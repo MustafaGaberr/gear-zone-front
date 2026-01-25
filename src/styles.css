@@ -1,12 +1,218 @@
 /* You can add global styles to this file, and also import other style files */
-/* @use '@angular/material' as mat; */
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  transition: direction 0.3s ease;
+}
+
+/* RTL/LTR Global Styles */
+[dir="rtl"] {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="ltr"] {
+  text-align: left;
+  direction: ltr;
+}
+
+/* RTL specific overrides */
+[dir="rtl"] .me-1 {
+  margin-right: 0 !important;
+  margin-left: 0.25rem !important;
+}
+
+[dir="rtl"] .me-2 {
+  margin-right: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
+[dir="rtl"] .me-3 {
+  margin-right: 0 !important;
+  margin-left: 1rem !important;
+}
+
+[dir="rtl"] .me-4 {
+  margin-right: 0 !important;
+  margin-left: 1.5rem !important;
+}
+
+[dir="rtl"] .me-5 {
+  margin-right: 0 !important;
+  margin-left: 3rem !important;
+}
+
+[dir="rtl"] .ms-1 {
+  margin-left: 0 !important;
+  margin-right: 0.25rem !important;
+}
+
+[dir="rtl"] .ms-2 {
+  margin-left: 0 !important;
+  margin-right: 0.5rem !important;
+}
+
+[dir="rtl"] .ms-3 {
+  margin-left: 0 !important;
+  margin-right: 1rem !important;
+}
+
+[dir="rtl"] .ms-4 {
+  margin-left: 0 !important;
+  margin-right: 1.5rem !important;
+}
+
+[dir="rtl"] .ms-5 {
+  margin-left: 0 !important;
+  margin-right: 3rem !important;
+}
+
+[dir="rtl"] .ms-auto {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+[dir="rtl"] .pe-1 {
+  padding-right: 0 !important;
+  padding-left: 0.25rem !important;
+}
+
+[dir="rtl"] .pe-2 {
+  padding-right: 0 !important;
+  padding-left: 0.5rem !important;
+}
+
+[dir="rtl"] .pe-3 {
+  padding-right: 0 !important;
+  padding-left: 1rem !important;
+}
+
+[dir="rtl"] .pe-4 {
+  padding-right: 0 !important;
+  padding-left: 1.5rem !important;
+}
+
+[dir="rtl"] .pe-5 {
+  padding-right: 0 !important;
+  padding-left: 3rem !important;
+}
+
+[dir="rtl"] .ps-1 {
+  padding-left: 0 !important;
+  padding-right: 0.25rem !important;
+}
+
+[dir="rtl"] .ps-2 {
+  padding-left: 0 !important;
+  padding-right: 0.5rem !important;
+}
+
+[dir="rtl"] .ps-3 {
+  padding-left: 0 !important;
+  padding-right: 1rem !important;
+}
+
+[dir="rtl"] .ps-4 {
+  padding-left: 0 !important;
+  padding-right: 1.5rem !important;
+}
+
+[dir="rtl"] .ps-5 {
+  padding-left: 0 !important;
+  padding-right: 3rem !important;
+}
+
+[dir="rtl"] .text-start {
+  text-align: right !important;
+}
+
+[dir="rtl"] .text-end {
+  text-align: left !important;
+}
+
+[dir="rtl"] .float-start {
+  float: right !important;
+}
+
+[dir="rtl"] .float-end {
+  float: left !important;
+}
+
+[dir="rtl"] .border-start {
+  border-left: none !important;
+  border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+}
+
+[dir="rtl"] .border-end {
+  border-right: none !important;
+  border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+}
+
+/* RTL Flex utilities */
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse !important;
+}
+
+[dir="rtl"] .flex-row-reverse {
+  flex-direction: row !important;
+}
+
+/* Arabic Font Support */
+[dir="rtl"] body {
+  font-family: 'Cairo', 'Tajawal', 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
+/* Smooth transitions for language switch */
+.lang-transition {
+  transition: all 0.3s ease;
+}
+
+/* Form input RTL adjustments */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+}
+
+[dir="rtl"] input::placeholder,
+[dir="rtl"] textarea::placeholder {
+  text-align: right;
+}
+
+/* Badge position RTL */
+[dir="rtl"] .position-absolute.start-100 {
+  left: auto !important;
+  right: 100% !important;
+}
+
+[dir="rtl"] .translate-middle {
+  transform: translate(50%, -50%) !important;
+}
+
+/* Dropdown RTL */
+[dir="rtl"] .dropdown-menu {
+  text-align: right;
+}
+
+[dir="rtl"] .dropdown-menu-end {
+  right: auto !important;
+  left: 0 !important;
+}
+
+/* List group RTL */
+[dir="rtl"] .list-group {
+  padding-right: 0;
+}
+
+/* Alert icon spacing */
+[dir="rtl"] .alert i {
+  margin-left: 0.5rem !important;
+  margin-right: 0 !important;
 }

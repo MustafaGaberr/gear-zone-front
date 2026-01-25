@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, Validators, FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { TranslationService } from '../../../core/services/translation.service';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -11,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
-  standalone: true,  
+  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -25,13 +26,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './login.css',
 })
 export class Login implements OnInit {
-  
+
   showPassword = false;
   loginForm!: FormGroup;
 
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly toastrService = inject(ToastrService);
+  public translationService = inject(TranslationService);
 
   initForms(): void {
     this.loginForm = new FormGroup({
@@ -46,30 +48,40 @@ export class Login implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-      this.loginForm.disable(); 
+      this.loginForm.disable();
 
       this.authService.getLoginApi(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log("dataaaaaaaaaaa" ,res)
+          console.log("dataaaaaaaaaaa", res)
           if (res.status === 'success' || res.token) {
-            this.toastrService.success('Welcome back!', 'Login Successful');
+            this.toastrService.success(
+              this.translationService.currentLang() === 'ar' ? 'مرحباً بعودتك!' : 'Welcome back!',
+              this.translationService.currentLang() === 'ar' ? 'تم تسجيل الدخول' : 'Login Successful'
+            );
             this.router.navigate(['/home']);
           }
-          
+
           this.loginForm.enable();
         },
         error: (err) => {
           this.loginForm.enable();
           console.error(err);
           if (err.status === 0) {
-            this.toastrService.error('Cannot connect to server. Please make sure the backend server is running.', 'Connection Error');
+            this.toastrService.error(
+              this.translationService.currentLang() === 'ar' ? 'لا يمكن الاتصال بالخادم.' : 'Cannot connect to server.',
+              this.translationService.currentLang() === 'ar' ? 'خطأ في الاتصال' : 'Connection Error'
+            );
           } else {
-            this.toastrService.error(err.error?.message || 'Invalid email or password', 'Login Failed');
+            this.toastrService.error(
+              err.error?.message || (this.translationService.currentLang() === 'ar' ? 'بريد إلكتروني أو كلمة مرور غير صحيحة' : 'Invalid email or password'),
+              this.translationService.currentLang() === 'ar' ? 'فشل تسجيل الدخول' : 'Login Failed'
+            );
           }
         }
       });
     } else {
-this.loginForm.markAllAsTouched();    }
+      this.loginForm.markAllAsTouched();
+    }
   }
 
   togglePasswordVisibility() {
