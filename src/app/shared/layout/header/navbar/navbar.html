@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark sticky-top"
+<nav class="navbar navbar-expand-md navbar-dark fixed-top"
   [ngClass]="transparent ? 'bg-transparent' : 'navbar-bg shadow'">
   <div class="container">
     <a routerLink="/home" class="navbar-brand">
@@ -26,12 +26,6 @@
       </ul>
 
       <div class="d-flex align-items-center gap-3">
-
-        <!-- Language Toggle Button -->
-        <button (click)="switchLanguage()" class="btn btn-link text-white p-0 lang-toggle-btn"
-          [title]="translationService.currentLang() === 'en' ? 'العربية' : 'English'">
-          <span class="lang-badge">{{ translationService.currentLang() === 'en' ? 'AR' : 'EN' }}</span>
-        </button>
 
         @if (authService.userData(); as user) {
 
@@ -89,6 +83,20 @@
               {{ translationService.translate('nav.licenses') }}
             </a>
             <div class="dropdown-divider"></div>
+
+            <!-- Language Toggle -->
+            <div class="dropdown-item lang-toggle-item" (click)="$event.stopPropagation()">
+              <span class="lang-label">Language</span>
+              <div class="lang-toggle-switch" (click)="switchLanguage()">
+                <span class="lang-option" [class.active]="translationService.currentLang() === 'en'">EN</span>
+                <div class="toggle-track" [class.ar-active]="translationService.currentLang() === 'ar'">
+                  <div class="toggle-thumb"></div>
+                </div>
+                <span class="lang-option" [class.active]="translationService.currentLang() === 'ar'">ع</span>
+              </div>
+            </div>
+
+            <div class="dropdown-divider"></div>
             <button class="dropdown-item text-danger" (click)="logout()">
               <i class="bi bi-box-arrow-right me-2"></i>
               {{ translationService.translate('nav.logout') }}
@@ -98,6 +106,16 @@
         </div>
 
         } @else {
+
+        <!-- Language Toggle for non-logged in users -->
+        <div class="lang-toggle-btn-wrapper" (click)="switchLanguage()">
+          <span class="lang-option-sm" [class.active]="translationService.currentLang() === 'en'">EN</span>
+          <div class="toggle-track-sm" [class.ar-active]="translationService.currentLang() === 'ar'">
+            <div class="toggle-thumb-sm"></div>
+          </div>
+          <span class="lang-option-sm" [class.active]="translationService.currentLang() === 'ar'">ع</span>
+        </div>
+
         <a routerLink="/login" class="nav-link nav-link-custom d-none d-md-block" (click)="closeMobileMenu()">
           {{ translationService.translate('nav.login') }}
         </a>

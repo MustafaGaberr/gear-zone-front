@@ -7,6 +7,11 @@
   padding-bottom: 1rem;
 }
 
+/* Make sure content doesn't hide behind fixed navbar */
+body {
+  padding-top: 76px;
+}
+
 .nav-link-custom {
   color: rgba(255, 255, 255, 0.9) !important;
   transition: color 0.2s ease;
@@ -39,28 +44,6 @@
   box-shadow: none;
 }
 
-/* Language Toggle Button */
-.lang-toggle-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.lang-badge {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  padding: 4px 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-
-.lang-badge:hover {
-  background: rgba(255, 107, 53, 0.2);
-  border-color: #ff6b35;
-}
-
 /* User Dropdown Container */
 .user-dropdown-container {
   position: relative;
@@ -84,7 +67,7 @@
   position: absolute;
   top: calc(100% + 0.5rem);
   right: 0;
-  min-width: 200px;
+  min-width: 240px;
   background: #1f2937;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
@@ -144,6 +127,124 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* Language Toggle Item in Dropdown */
+.lang-toggle-item {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default !important;
+}
+
+.lang-toggle-item:hover {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.lang-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.lang-toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.lang-option {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.2s ease;
+}
+
+.lang-option.active {
+  color: #fff;
+}
+
+.toggle-track {
+  width: 36px;
+  height: 20px;
+  background: #374151;
+  border-radius: 10px;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.toggle-track.ar-active {
+  background: #ff6b35;
+}
+
+.toggle-thumb {
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease;
+}
+
+.toggle-track.ar-active .toggle-thumb {
+  transform: translateX(16px);
+}
+
+/* Language Toggle for non-logged in users (in header) */
+.lang-toggle-btn-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.lang-toggle-btn-wrapper:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lang-option-sm {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.2s ease;
+}
+
+.lang-option-sm.active {
+  color: #fff;
+}
+
+.toggle-track-sm {
+  width: 28px;
+  height: 16px;
+  background: #374151;
+  border-radius: 8px;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.toggle-track-sm.ar-active {
+  background: #ff6b35;
+}
+
+.toggle-thumb-sm {
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease;
+}
+
+.toggle-track-sm.ar-active .toggle-thumb-sm {
+  transform: translateX(12px);
+}
+
 /* RTL Support */
 [dir="rtl"] .user-dropdown-menu {
   right: auto;
@@ -175,4 +276,22 @@
 [dir="rtl"] .me-2 {
   margin-right: 0 !important;
   margin-left: 0.5rem !important;
+}
+
+[dir="rtl"] .toggle-thumb {
+  left: auto;
+  right: 2px;
+}
+
+[dir="rtl"] .toggle-track.ar-active .toggle-thumb {
+  transform: translateX(-16px);
+}
+
+[dir="rtl"] .toggle-thumb-sm {
+  left: auto;
+  right: 2px;
+}
+
+[dir="rtl"] .toggle-track-sm.ar-active .toggle-thumb-sm {
+  transform: translateX(-12px);
 }
