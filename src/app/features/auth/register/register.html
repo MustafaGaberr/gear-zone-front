@@ -13,11 +13,11 @@
                 <mat-step *ngIf="accountInfoForm" [stepControl]="accountInfoForm"
                     [label]="translationService.currentLang() === 'ar' ? 'معلومات الحساب' : 'Account Info'">
                     <form [formGroup]="accountInfoForm" (ngSubmit)="register()">
-                        <div class="name-row">
 
-                            <div class="input-field half">
+                        <!-- Row 1: First Name & Last Name -->
+                        <div class="form-row">
+                            <div class="input-field">
                                 @let fnamecontrol=accountInfoForm.get('firstName');
-
                                 <p>{{ translationService.translate('auth.firstName') }}</p>
                                 <div class="input-wrapper">
                                     <mat-icon class="input-icon">person</mat-icon>
@@ -26,11 +26,9 @@
                                         type="text"
                                         [placeholder]="translationService.currentLang() === 'ar' ? 'أحمد' : 'Ahmed'"
                                         formControlName="firstName">
-
                                 </div>
-
                                 @if (fnamecontrol?.errors && fnamecontrol?.touched) {
-                                <div class="alert p-1 alert-danger " role="alert">
+                                <div class="alert p-1 alert-danger" role="alert">
                                     <ul class="m-0 list-unstyled small text-danger">
                                         @if(fnamecontrol?.getError('required')) {
                                         <li>{{ translationService.currentLang() === 'ar' ? 'الاسم الأول مطلوب' : 'First
@@ -40,16 +38,11 @@
                                         <li>{{ translationService.currentLang() === 'ar' ? '3 أحرف على الأقل' : 'At
                                             least 3 characters' }}</li>
                                         }
-                                        @if(fnamecontrol?.getError('maxlength')) {
-                                        <li>{{ translationService.currentLang() === 'ar' ? 'لا يتجاوز 10 أحرف' : 'Exceed
-                                            10 characters' }}</li>
-                                        }
                                     </ul>
                                 </div>
-
                                 }
                             </div>
-                            <div class="input-field half">
+                            <div class="input-field">
                                 @let lnamecontrole=accountInfoForm.get('lastName');
                                 <p>{{ translationService.translate('auth.lastName') }}</p>
                                 <div class="input-wrapper">
@@ -59,10 +52,9 @@
                                         type="text"
                                         [placeholder]="translationService.currentLang() === 'ar' ? 'محمد' : 'Mohamed'"
                                         formControlName="lastName">
-
                                 </div>
-                                @if(lnamecontrole?.errors&& lnamecontrole?.touched){
-                                <div class="alert p-1 alert-danger " role="alert">
+                                @if(lnamecontrole?.errors && lnamecontrole?.touched){
+                                <div class="alert p-1 alert-danger" role="alert">
                                     <ul class="m-0 list-unstyled small text-danger">
                                         @if(lnamecontrole?.getError('required')) {
                                         <li>{{ translationService.currentLang() === 'ar' ? 'الاسم الأخير مطلوب' : 'Last
@@ -72,129 +64,122 @@
                                         <li>{{ translationService.currentLang() === 'ar' ? '3 أحرف على الأقل' : 'At
                                             least 3 characters' }}</li>
                                         }
-                                        @if(lnamecontrole?.getError('maxlength')) {
-                                        <li>{{ translationService.currentLang() === 'ar' ? 'لا يتجاوز 10 أحرف' : 'Exceed
-                                            10 characters' }}</li>
+                                    </ul>
+                                </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Username & Email -->
+                        <div class="form-row">
+                            <div class="input-field">
+                                @let usernamecontrole=accountInfoForm.get('userName');
+                                <p>{{ translationService.translate('auth.userName') }}</p>
+                                <div class="input-wrapper">
+                                    <mat-icon class="input-icon">person</mat-icon>
+                                    <input
+                                        [class]="{'border-success':usernamecontrole?.valid ,'border-danger':usernamecontrole?.invalid && usernamecontrole?.touched}"
+                                        type="text"
+                                        [placeholder]="translationService.currentLang() === 'ar' ? 'اسم المستخدم' : 'Username'"
+                                        formControlName="userName">
+                                </div>
+                                @if(usernamecontrole?.errors && usernamecontrole?.touched){
+                                <div class="alert p-1 alert-danger" role="alert">
+                                    <ul class="m-0 list-unstyled small text-danger">
+                                        @if(usernamecontrole?.getError('required')) {
+                                        <li>{{ translationService.currentLang() === 'ar' ? 'اسم المستخدم مطلوب' :
+                                            'Username is required' }}</li>
+                                        }
+                                    </ul>
+                                </div>
+                                }
+                            </div>
+                            <div class="input-field">
+                                @let emailcontrole=accountInfoForm.get('email');
+                                <p>{{ translationService.translate('auth.email') }}</p>
+                                <div class="input-wrapper">
+                                    <mat-icon class="input-icon">email</mat-icon>
+                                    <input
+                                        [class]="{'border-success':emailcontrole?.valid ,'border-danger':emailcontrole?.invalid && emailcontrole?.touched}"
+                                        type="email"
+                                        [placeholder]="translationService.currentLang() === 'ar' ? 'بريدك@الإلكتروني.com' : 'your@email.com'"
+                                        formControlName="email">
+                                </div>
+                                @if(emailcontrole?.errors && emailcontrole?.touched){
+                                <div class="alert p-1 alert-danger" role="alert">
+                                    <ul class="m-0 list-unstyled small text-danger">
+                                        @if(emailcontrole?.getError('required')) {
+                                        <li>{{ translationService.currentLang() === 'ar' ? 'البريد الإلكتروني مطلوب' :
+                                            'Email is required' }}</li>
+                                        }
+                                        @if(emailcontrole?.getError('email')) {
+                                        <li>{{ translationService.currentLang() === 'ar' ? 'يرجى إدخال بريد إلكتروني
+                                            صحيح' : 'Please enter a valid email' }}</li>
                                         }
                                     </ul>
                                 </div>
                                 }
                             </div>
                         </div>
-                        <div class="input-field">
-                            @let usernamecontrole=accountInfoForm.get('userName');
-                            <p>{{ translationService.translate('auth.userName') }}</p>
-                            <div class="input-wrapper">
-                                <mat-icon class="input-icon">person</mat-icon>
-                                <input
-                                    [class]="{'border-success':usernamecontrole?.valid ,'border-danger':usernamecontrole?.invalid && usernamecontrole?.touched}"
-                                    type="text"
-                                    [placeholder]="translationService.currentLang() === 'ar' ? 'اسم المستخدم' : 'Username'"
-                                    formControlName="userName">
+
+                        <!-- Row 3: Password & Confirm Password -->
+                        <div class="form-row">
+                            <div class="input-field">
+                                @let passwordcontrole=accountInfoForm.get('password');
+                                <p>{{ translationService.translate('auth.password') }}</p>
+                                <div class="input-wrapper">
+                                    <mat-icon class="input-icon">lock</mat-icon>
+                                    <input [type]="showPassword ? 'text' : 'password'"
+                                        [placeholder]="translationService.currentLang() === 'ar' ? 'أدخل كلمة المرور' : 'Enter your password'"
+                                        formControlName="password"
+                                        [class]="{'border-success':passwordcontrole?.valid ,'border-danger':passwordcontrole?.invalid && passwordcontrole?.touched}">
+                                    <button type="button" class="eye-btn" (click)="togglePasswordVisibility()">
+                                        <mat-icon class="eye-icon">{{ showPassword ? 'visibility' : 'visibility_off'
+                                            }}</mat-icon>
+                                    </button>
+                                </div>
+                                @if (passwordcontrole?.errors && passwordcontrole?.touched) {
+                                <div class="alert p-1 alert-danger" role="alert">
+                                    <ul class="m-0 list-unstyled small text-danger">
+                                        @if(passwordcontrole?.getError('required')) {
+                                        <li>{{ translationService.currentLang() === 'ar' ? 'كلمة المرور مطلوبة' :
+                                            'Password is required' }}</li>
+                                        }
+                                        @if(passwordcontrole?.getError('pattern')){
+                                        <li>{{ translationService.currentLang() === 'ar' ? '8 أحرف على الأقل مع حرف كبير
+                                            وصغير' : '8+ chars with upper/lowercase' }}</li>
+                                        }
+                                    </ul>
+                                </div>
+                                }
                             </div>
-                            @if(usernamecontrole?.errors && usernamecontrole?.touched){
-                            <div class="alert p-1 alert-danger " role="alert">
-                                <ul class="m-0 list-unstyled small text-danger">
-                                    @if(usernamecontrole?.getError('required')) {
-                                    <li>{{ translationService.currentLang() === 'ar' ? 'اسم المستخدم مطلوب' : 'Username
-                                        is required' }}</li>
-                                    }
-                                </ul>
+                            <div class="input-field">
+                                @let confirmcontrole=accountInfoForm.get('confirmPassword');
+                                <p>{{ translationService.translate('auth.confirmPassword') }}</p>
+                                <div class="input-wrapper">
+                                    <mat-icon class="input-icon">lock</mat-icon>
+                                    <input
+                                        [class]="{'border-success':confirmcontrole?.valid ,'border-danger':confirmcontrole?.invalid && confirmcontrole?.touched}"
+                                        [type]="showConfirmPassword ? 'text' : 'password'"
+                                        [placeholder]="translationService.currentLang() === 'ar' ? 'تأكيد كلمة المرور' : 'Confirm your password'"
+                                        formControlName="confirmPassword">
+                                    <button type="button" class="eye-btn" (click)="toggleConfirmPasswordVisibility()">
+                                        <mat-icon class="eye-icon">{{ showConfirmPassword ? 'visibility' :
+                                            'visibility_off' }}</mat-icon>
+                                    </button>
+                                </div>
+                                @if(confirmcontrole?.touched && accountInfoForm.getError('mismatch')) {
+                                <div class="alert p-1 alert-danger" role="alert">
+                                    <ul class="m-0 list-unstyled small text-danger">
+                                        <li>{{ translationService.currentLang() === 'ar' ? 'كلمة المرور غير متطابقة' :
+                                            'Passwords do not match' }}</li>
+                                    </ul>
+                                </div>
+                                }
                             </div>
-                            }
                         </div>
 
-                        <div class="input-field">
-                            @let emailcontrole=accountInfoForm.get('email');
-                            <p>{{ translationService.translate('auth.email') }}</p>
-                            <div class="input-wrapper">
-                                <mat-icon class="input-icon">email</mat-icon>
-                                <input
-                                    [class]="{'border-success':emailcontrole?.valid ,'border-danger':emailcontrole?.invalid && emailcontrole?.touched}"
-                                    type="email"
-                                    [placeholder]="translationService.currentLang() === 'ar' ? 'بريدك@الإلكتروني.com' : 'your@email.com'"
-                                    formControlName="email">
-                            </div>
-                            @if(emailcontrole?.errors && emailcontrole?.touched){
-                            <div class="alert p-1 alert-danger " role="alert">
-                                <ul class="m-0 list-unstyled small text-danger">
-                                    @if(emailcontrole?.getError('required')) {
-                                    <li>{{ translationService.currentLang() === 'ar' ? 'البريد الإلكتروني مطلوب' :
-                                        'Email is required' }}</li>
-                                    }
-                                    @if(emailcontrole?.getError('email')) {
-                                    <li>{{ translationService.currentLang() === 'ar' ? 'يرجى إدخال بريد إلكتروني صحيح' :
-                                        'Please enter a valid email format' }}</li>
-                                    }
-
-                                </ul>
-                            </div>
-                            }
-
-
-                        </div>
-
-                        <div class="input-field">
-                            @let passwordcontrole=accountInfoForm.get('password');
-                            <p>{{ translationService.translate('auth.password') }}</p>
-                            <div class="input-wrapper">
-                                <mat-icon class="input-icon">lock</mat-icon>
-                                <input [type]="showPassword ? 'text' : 'password'"
-                                    [placeholder]="translationService.currentLang() === 'ar' ? 'أدخل كلمة المرور' : 'Enter your password'"
-                                    formControlName="password"
-                                    [class]="{'border-success':passwordcontrole?.valid ,'border-danger':passwordcontrole?.invalid && passwordcontrole?.touched}">
-                                <button type="button" class="eye-btn" (click)="togglePasswordVisibility()">
-                                    <mat-icon class="eye-icon">{{ showPassword ? 'visibility' : 'visibility_off'
-                                        }}</mat-icon>
-                                </button>
-
-                            </div>
-                            @if (passwordcontrole?.errors && passwordcontrole?.touched) {
-                            <div class="alert p-1 alert-danger " role="alert">
-                                <ul class="m-0 list-unstyled small text-danger">
-                                    @if(passwordcontrole?.getError('required')) {
-                                    <li>{{ translationService.currentLang() === 'ar' ? 'كلمة المرور مطلوبة' : 'Password
-                                        is required' }}</li>
-                                    }
-                                    @if(passwordcontrole?.getError('pattern')){
-                                    <li>{{ translationService.currentLang() === 'ar' ? 'يجب أن تحتوي كلمة المرور على 8
-                                        أحرف على الأقل مع حرف كبير وصغير' : 'Password must be at least 8 characters with
-                                        uppercase and lowercase' }}</li>
-                                    }
-                                </ul>
-                            </div>
-
-                            }
-                        </div>
-
-                        <div class="input-field">
-                            @let confirmcontrole=accountInfoForm.get('confirmPassword');
-                            <p>{{ translationService.translate('auth.confirmPassword') }}</p>
-                            <div class="input-wrapper">
-                                <mat-icon class="input-icon">lock</mat-icon>
-                                <input
-                                    [class]="{'border-success':confirmcontrole?.valid ,'border-danger':confirmcontrole?.invalid && confirmcontrole?.touched}"
-                                    [type]="showConfirmPassword ? 'text' : 'password'"
-                                    [placeholder]="translationService.currentLang() === 'ar' ? 'تأكيد كلمة المرور' : 'Confirm your password'"
-                                    formControlName="confirmPassword">
-                                <button type="button" class="eye-btn" (click)="toggleConfirmPasswordVisibility()">
-                                    <mat-icon class="eye-icon">{{ showConfirmPassword ? 'visibility' : 'visibility_off'
-                                        }}</mat-icon>
-                                </button>
-
-                            </div>
-                            @if(confirmcontrole?.touched && accountInfoForm.getError('mismatch')) {
-                            <div class="alert p-1 alert-danger" role="alert">
-                                <ul class="m-0 list-unstyled small text-danger">
-                                    <li>{{ translationService.currentLang() === 'ar' ? 'كلمة المرور غير متطابقة' :
-                                        'Password confirmation is incorrect' }}</li>
-                                </ul>
-                            </div>
-                            }
-
-
-
-                        </div>
+                        <!-- Row 4: Phone (single) -->
                         <div class="input-field">
                             @let phonecontrole=accountInfoForm.get('phone');
                             <p>{{ translationService.translate('auth.phone') }}</p>
@@ -205,18 +190,16 @@
                                     type="tel" placeholder="01024855683" formControlName="phone">
                             </div>
                             @if(phonecontrole?.errors && phonecontrole?.touched){
-                            <div class="alert p-1 alert-danger " role="alert">
+                            <div class="alert p-1 alert-danger" role="alert">
                                 <ul class="m-0 list-unstyled small text-danger">
                                     @if(phonecontrole?.getError('required')) {
                                     <li>{{ translationService.currentLang() === 'ar' ? 'رقم الهاتف مطلوب' : 'Phone is
                                         required' }}</li>
                                     }
-
                                     @if(phonecontrole?.getError('pattern')){
                                     <li>{{ translationService.currentLang() === 'ar' ? 'يجب أن يبدأ بـ 010, 011, 012, أو
                                         015' : 'Must start with 010, 011, 012, or 015' }}</li>
                                     }
-
                                 </ul>
                             </div>
                             }
