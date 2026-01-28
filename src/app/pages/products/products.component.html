@@ -88,7 +88,7 @@
           <div class="card h-100 product-card border-0 shadow-sm">
 
             <div class="card-img-wrapper position-relative p-3 bg-light rounded-top">
-              <img src="/images/product-1.jpg" class="card-img-top" [alt]="product.name">
+              <img [src]="product.imageCover" class="card-img-top" [alt]="product.name">
 
               @if (product.stock > 0) {
               <span class="badge bg-success-subtle text-success position-absolute top-0 end-0 m-3">{{
