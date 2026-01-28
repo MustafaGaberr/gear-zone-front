@@ -2,7 +2,14 @@
     background-color: #F9FAFB;
     padding-top: 6.5rem;
     padding-bottom: 2rem;
+    min-height: 100vh;
 }
 .card-custom{
-  max-height: 130px;
+    transition: all 0.2s ease;
+}
+.card-custom:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.h-fit {
+    height: fit-content;
 }
