@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ToastrService } from 'ngx-toastr';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +34,6 @@ export class Login implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly toastrService = inject(ToastrService);
   public translationService = inject(TranslationService);
-  private readonly cookieService=inject(CookieService)
 
   initForms(): void {
     this.loginForm = new FormGroup({
@@ -65,7 +63,6 @@ export class Login implements OnInit {
 
           this.loginForm.enable();
         },
- 
         error: (err) => {
           this.loginForm.enable();
           console.error(err);

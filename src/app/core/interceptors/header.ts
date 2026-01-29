@@ -10,14 +10,13 @@ export const headersInterceptor: HttpInterceptorFn = (req, next) => {
   if(cookieService.check('token')){
    
      req=req.clone({
-     
-      setHeaders: {
-        Authorization: `Bearer ${cookieService.get('token')}`
-      }
-    
-    
-    });
-    return next(req)
+    //   setHeaders:{
+    //     token:cookieService.get('token')
+    //   },
+     setHeaders: {
+      Authorization: `Bearer ${cookieService.get('token')}`
+    }
+    })
    
   }
 

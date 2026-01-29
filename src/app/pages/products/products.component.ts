@@ -6,7 +6,6 @@ import { ProductsService } from '../../core/services/products.service';
 import { Product, Category } from '../../core/interfaces/product';
 import { CartService } from '../../core/services/cart.service';
 import { TranslationService } from '../../core/services/translation.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -19,10 +18,9 @@ export class ProductsComponent implements OnInit {
 
   // Injections
   private readonly _ProductsService = inject(ProductsService);
-  private readonly cartService = inject(CartService);
+  private readonly _CartService = inject(CartService);
   public translationService = inject(TranslationService)
   private readonly changeDetectorRef=inject(ChangeDetectorRef)
-  private readonly toastrService=inject(ToastrService)
 
   // Data Variables
   products: Product[] = [];
@@ -56,7 +54,7 @@ export class ProductsComponent implements OnInit {
         this.products = res.data;
         console.log("products", res.data)
         this.changeDetectorRef.detectChanges()
-        this.filteredProducts = res.data;
+        // this.filteredProducts = res.data;
       }
     });
   }
@@ -88,18 +86,11 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(productId: string) {
-     this.cartService.addToCart(productId).subscribe({
-      next:(res)=>{
-        console.log(res)
-        if(res.status==='success'){
-            this.toastrService.success(  
-            this.translationService.currentLang() === 'ar' ? 'تمت اضافة المنتج اى السله بنجاح!' : 'Product added to cart successfully',
-            this.translationService.currentLang() === 'ar' ? 'السله' : 'Cart')
-
-        }
-        
+    this._CartService.addToCart(productId).subscribe({
+      next: (res) => {
+        alert(this.translationService.translate('products.addToCart') + ' ✓');
       }
-    })
+    });
   }
 
   clearFilters() {
