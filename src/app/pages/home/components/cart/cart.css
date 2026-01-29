@@ -1,8 +1,11 @@
-.bg{
-    background-color: #F9FAFB;
-    padding-top: 6.5rem;
-    padding-bottom: 2rem;
+.bg {
+  background-color: #F9FAFB;
+  padding-top: 6rem;
+  padding-bottom: 2rem;
+  min-height: 100vh;
 }
-.card-custom{
-  max-height: 130px;
+
+
+.icon-box {
+  flex-shrink: 0;
 }

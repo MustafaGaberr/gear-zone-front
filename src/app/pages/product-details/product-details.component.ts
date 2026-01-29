@@ -1,9 +1,11 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../core/services/products.service';
 import { CartService } from '../../core/services/cart.service';
 import { Product } from '../../core/interfaces/product';
+import { TranslationService } from '../../core/services/translation.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
@@ -17,6 +19,9 @@ export class ProductDetailsComponent implements OnInit {
   private readonly _ActivatedRoute = inject(ActivatedRoute);
   private readonly _ProductsService = inject(ProductsService);
   private readonly _CartService = inject(CartService);
+   public translationService = inject(TranslationService)
+  private readonly changeDetectorRef=inject(ChangeDetectorRef)
+  private readonly toastrService=inject(ToastrService)
 
   // Product data
   product: Product | null = null;
@@ -77,18 +82,19 @@ export class ProductDetailsComponent implements OnInit {
     this.count.update(n => (n > 1 ? n - 1 : 1));
   }
 
-  addToCart(): void {
-    if (this.product) {
-      this._CartService.addToCart(this.product._id).subscribe({
-        next: (res) => {
-          alert('تمت الإضافة إلى السلة ✓');
-        },
-        error: (err) => {
-          console.error('Error adding to cart:', err);
+  addToCart(productId: string) {
+     this._CartService.addToCart(productId).subscribe({
+      next:(res)=>{
+        console.log(res)
+        if(res.status ==='success'){
+        this.toastrService.success(  
+              this.translationService.currentLang() === 'ar' ? 'تمت اضافة المنتج اى السله بنجاح!' : 'Product added to cart successfully',
+              this.translationService.currentLang() === 'ar' ? 'السله' : 'Cart')
         }
-      });
-    }
+      }
+    })
   }
+
 
   // Calculate discount percentage
   getDiscountPercentage(): number {

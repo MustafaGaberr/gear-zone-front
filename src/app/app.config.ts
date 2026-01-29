@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
       scrollPositionRestoration: 'top',
       anchorScrolling: 'enabled'
     })),
-    provideHttpClient(withFetch(), withInterceptors([errorsInterceptor, headersInterceptor],)),
+    provideHttpClient(withFetch(), withInterceptors([errorsInterceptor,headersInterceptor])),
     provideToastr(),
     provideAnimations()
   ]

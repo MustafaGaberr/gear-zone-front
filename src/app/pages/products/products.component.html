@@ -39,7 +39,7 @@
           <label class="form-label text-muted small">{{ translationService.translate('products.priceRange') }}</label>
           <div class="d-flex align-items-center justify-content-between">
             <span class="text-muted small">$0</span>
-            <span class="text-muted small">$1000</span>
+            <span class="text-muted small">$20000</span>
           </div>
           <input type="range" class="form-range" min="0" max="1000" [(ngModel)]="priceRange[1]"
             (change)="applyFilters()">
@@ -83,11 +83,11 @@
 
       <!-- Products Grid -->
       <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-        @for (product of products; track product._id) {
+        @for (product of filteredProducts; track product._id) {
         <div class="col">
           <div class="card h-100 product-card border-0 shadow-sm">
 
-            <a [routerLink]="['/product-details', product._id]" class="text-decoration-none">
+            <a [routerLink]="['/product-details',product.slug ,product._id]" class="text-decoration-none">
               <div class="card-img-wrapper position-relative p-3 bg-light rounded-top">
                 <img [src]="product.imageCover" class="card-img-top" [alt]="product.name">
 

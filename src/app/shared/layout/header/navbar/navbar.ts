@@ -1,9 +1,10 @@
-import { Component, Input, inject, HostListener, ElementRef } from '@angular/core';
+import { Component, Input, inject, HostListener, ElementRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 const GZLogo = 'assets/images/GZ-Logo.png';
 import { AuthService } from '../../../../core/services/auth.service';
 import { TranslationService } from '../../../../core/services/translation.service';
+import { CartService } from '../../../../core/services/cart.service';
 
 interface CartItem {
   quantity: number;
@@ -22,10 +23,11 @@ interface User {
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   public authService = inject(AuthService);
   public translationService = inject(TranslationService);
   private elementRef = inject(ElementRef);
+  private cartService = inject(CartService);
 
   @Input() transparent = false;
 
@@ -38,10 +40,20 @@ export class NavbarComponent {
   isNotificationOpen = false;
   isUserMenuOpen = false;
 
+  cartCount: number = 0;
+
   logoImage = GZLogo;
 
+  ngOnInit(): void {
+    this.cartService.cartNumber.subscribe({
+      next: (value) => {
+        this.cartCount = value;
+      }
+    });
+  }
+
   get cartItemCount(): number {
-    return this.cart.reduce((sum, item) => sum + item.quantity, 0);
+    return this.cartCount;
   }
 
   toggleMobileMenu(): void {
